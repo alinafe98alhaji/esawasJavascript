@@ -512,6 +512,199 @@
 
 /*
 --------------------------------------------------------------------------------------
+----------------------)MAIN CODE_-----------------------------------------------------
+----i made this to distinguish between pieces of code as i keep adding functionality--
+--------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------
+*/
+
+// 'use client';
+
+// import { useState } from 'react';
+
+// const SurveyPage = () => {
+  
+//   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
+//   const [error, setError] = useState<string | null>(null);
+
+//   const [responses, setResponses] = useState({
+//     UWSS: null,
+//     USSM: null,
+//     RWSSM: null,
+//     RSSM: null,
+//     FM: null,
+//     RF: null,
+//     UOM: null,
+//   });
+
+//   const [yesAreas1ai, setYesAreas1ai] = useState<string[]>([]); // Yes areas after 1.a(i)
+//   const [noAreas1ai, setNoAreas1ai] = useState<string[]>([]);   // No areas after 1.a(i)
+//   const [activeAreas, setActiveAreas] = useState<string[]>(Object.keys(responses)); // Active areas for the flow
+
+//   const [yesAreas1aii, setYesAreas1aii] = useState<string[]>([]); // Yes areas for 1a(iii)
+//   const [finalAreas1aiii, setFinalAreas1aiii] = useState<string[]>([]); // Areas proceeding to 1a(iii)
+
+//   const questions = [
+//     { id: '1', text: 'Question 1: Select Yes/No for each area' },
+//     { id: '1a', text: 'Question 1a: Select Yes/No for each area again' },
+//     { id: '1ai', text: 'Question 1a(i): Yes/No again for filtered areas from 1a' },
+//     { id: '1aii', text: 'Question 1a(ii): Multi-option for areas from 1a(i) with Yes' },
+//     { id: '1aiii', text: 'Question 1a(iii): Multi-option for all areas' },
+//     { id: '1aiv', text: 'Question 1a(iv): Multi-option for areas from 1a(i) with No' }
+//   ];
+
+//   const handleYesNoChange = (area: string, value: boolean) => {
+//     setResponses((prevResponses) => ({
+//       ...prevResponses,
+//       [area]: value,
+//     }));
+//     setError(null); // Clear error when user makes a selection
+//   };
+
+//   const handleFiveOptionChange = (area: string, value: string) => {
+//     setResponses((prevResponses) => ({
+//       ...prevResponses,
+//       [area]: value,
+//     }));
+//     setError(null); // Clear error when user makes a selection
+//   };
+
+//   // Get areas that selected Yes or No
+//   const getYesAreas = () => activeAreas.filter((area) => responses[area as keyof typeof responses] === true);
+//   const getNoAreas = () => activeAreas.filter((area) => responses[area as keyof typeof responses] === false);
+
+//   // Get areas that selected options 1-4 (for 1.a(ii) and 1.a(iii))
+//   const getOptions1to4 = () => yesAreas1ai.filter((area) => {
+//     const value = responses[area as keyof typeof responses];
+//     return value !== null && value !== '5';
+//   });
+
+//   // Validation: Ensure all areas have a selection
+//   const validateAllFieldsSelected = (areas: string[]) => {
+//     for (const area of areas) {
+//       if (responses[area as keyof typeof responses] === null) {
+//         return false;
+//       }
+//     }
+//     return true;
+//   };
+
+//   const handleNext = () => {
+    
+//     const currentQuestion = questions[currentQuestionIndex];
+
+//     if (currentQuestion.id === '1a') {
+//       // Validate all fields for 1.a
+//       if (!validateAllFieldsSelected(activeAreas)) {
+//         setError('Please select Yes or No for all areas.');
+//         return; // Stop here if validation fails
+//       }
+//       const yesAreas = getYesAreas();
+//       setActiveAreas(yesAreas); // Remove areas that selected "No" from active areas
+//     } else if (currentQuestion.id === '1ai') {
+//       // Validate Yes/No fields for filtered areas in 1.a(i)
+//       if (!validateAllFieldsSelected(activeAreas)) {
+//         setError('Please select Yes or No for all areas.');
+//         return; // Stop here if validation fails
+//       }
+//       setYesAreas1ai(getYesAreas()); // Set Yes areas for 1a(ii)
+//       setNoAreas1ai(getNoAreas());   // Set No areas for 1a(iv)
+//     } else if (currentQuestion.id === '1aii') {
+//       // Validate multi-option fields for 1.a(ii)
+//       if (!validateAllFieldsSelected(yesAreas1ai)) {
+//         setError('Please select an option for all areas.');
+//         return; // Stop here if validation fails
+//       }
+//       const areasFor1aiii = getOptions1to4(); // Only areas with option 1-4 proceed
+//       setFinalAreas1aiii(areasFor1aiii); // Set final areas for 1.a(iii)
+//     }
+
+//     // Move to the next question
+//     setCurrentQuestionIndex((prevIndex) => prevIndex + 1);
+//     setError(null); // Clear error when moving to next question
+//   };
+
+//   const handleBack = () => {
+//     if (currentQuestionIndex > 0) {
+//       setCurrentQuestionIndex((prevIndex) => prevIndex - 1);
+//     }
+//   };
+
+//   const renderQuestion = () => {
+//     const currentQuestion = questions[currentQuestionIndex];
+
+//     const renderYesNoRadios = (areas: string[]) => (
+//       areas.map((area) => (
+//         <div key={area}>
+//           <label>{area}</label>
+//           <input
+//             type="radio"
+//             name={`yesno-${area}`}
+//             value="yes"
+//             checked={responses[area as keyof typeof responses] === true}
+//             onChange={() => handleYesNoChange(area, true)}
+//           />
+//           Yes
+//           <input
+//             type="radio"
+//             name={`yesno-${area}`}
+//             value="no"
+//             checked={responses[area as keyof typeof responses] === false}
+//             onChange={() => handleYesNoChange(area, false)}
+//           />
+//           No
+//         </div>
+//       ))
+//     );
+
+//     const renderFiveOptionRadios = (areas: string[]) => (
+//       areas.map((area) => (
+//         <div key={area}>
+//           <label>{area}</label>
+//           <input type="radio" name={`multi-${area}`} value="1" onChange={() => handleFiveOptionChange(area, "1")} /> Option 1
+//           <input type="radio" name={`multi-${area}`} value="2" onChange={() => handleFiveOptionChange(area, "2")} /> Option 2
+//           <input type="radio" name={`multi-${area}`} value="3" onChange={() => handleFiveOptionChange(area, "3")} /> Option 3
+//           <input type="radio" name={`multi-${area}`} value="4" onChange={() => handleFiveOptionChange(area, "4")} /> Option 4
+//           <input type="radio" name={`multi-${area}`} value="5" onChange={() => handleFiveOptionChange(area, "5")} /> Option 5
+//         </div>
+//       ))
+//     );
+
+//     switch (currentQuestion.id) {
+//       case '1':
+//         return <div><h3>{currentQuestion.text}</h3>{renderYesNoRadios(Object.keys(responses))}</div>;
+//       case '1a':
+//         return <div><h3>{currentQuestion.text}</h3>{renderYesNoRadios(activeAreas)}</div>;
+//       case '1ai':
+//         return <div><h3>{currentQuestion.text}</h3>{renderYesNoRadios(activeAreas)}</div>;
+//       case '1aii':
+//         return <div><h3>{currentQuestion.text}</h3>{renderFiveOptionRadios(yesAreas1ai)}</div>;
+//       case '1aiii':
+//         return <div><h3>{currentQuestion.text}</h3>{renderFiveOptionRadios(finalAreas1aiii)}</div>; // Filtered areas
+//       case '1aiv':
+//         return <div><h3>{currentQuestion.text}</h3>{renderFiveOptionRadios(noAreas1ai)}</div>; // Correctly render No areas from 1.a(i)
+//       default:
+//         return <p>No more questions.</p>;
+//     }
+//   };
+
+//   return (
+//     <div>
+//       {renderQuestion()}
+//       {error && <p style={{ color: 'red' }}>{error}</p>}
+//       <div>
+//         {currentQuestionIndex > 0 && <button onClick={handleBack}>Back</button>}
+//         {currentQuestionIndex < questions.length - 1 && <button onClick={handleNext}>Next</button>}
+//         {currentQuestionIndex === questions.length - 1 && <button>Submit</button>}
+//       </div>
+//     </div>
+//   );
+// };
+
+// export default SurveyPage;
+
+/*
+--------------------------------------------------------------------------------------
 --------------------------------------------------------------------------------------
 ----i made this to distinguish between pieces of code as i keep adding functionality--
 --------------------------------------------------------------------------------------
@@ -523,7 +716,6 @@
 import { useState } from 'react';
 
 const SurveyPage = () => {
-  
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [error, setError] = useState<string | null>(null);
 
@@ -537,12 +729,12 @@ const SurveyPage = () => {
     UOM: null,
   });
 
-  const [yesAreas1ai, setYesAreas1ai] = useState<string[]>([]); // Yes areas after 1.a(i)
-  const [noAreas1ai, setNoAreas1ai] = useState<string[]>([]);   // No areas after 1.a(i)
-  const [activeAreas, setActiveAreas] = useState<string[]>(Object.keys(responses)); // Active areas for the flow
+  const [yesAreas1ai, setYesAreas1ai] = useState<string[]>([]);
+  const [noAreas1ai, setNoAreas1ai] = useState<string[]>([]);
+  const [activeAreas, setActiveAreas] = useState<string[]>(Object.keys(responses));
 
-  const [yesAreas1aii, setYesAreas1aii] = useState<string[]>([]); // Yes areas for 1a(iii)
-  const [finalAreas1aiii, setFinalAreas1aiii] = useState<string[]>([]); // Areas proceeding to 1a(iii)
+  const [yesAreas1aii, setYesAreas1aii] = useState<string[]>([]);
+  const [finalAreas1aiii, setFinalAreas1aiii] = useState<string[]>([]);
 
   const questions = [
     { id: '1', text: 'Question 1: Select Yes/No for each area' },
@@ -558,7 +750,7 @@ const SurveyPage = () => {
       ...prevResponses,
       [area]: value,
     }));
-    setError(null); // Clear error when user makes a selection
+    setError(null);
   };
 
   const handleFiveOptionChange = (area: string, value: string) => {
@@ -566,20 +758,17 @@ const SurveyPage = () => {
       ...prevResponses,
       [area]: value,
     }));
-    setError(null); // Clear error when user makes a selection
+    setError(null);
   };
 
-  // Get areas that selected Yes or No
   const getYesAreas = () => activeAreas.filter((area) => responses[area as keyof typeof responses] === true);
   const getNoAreas = () => activeAreas.filter((area) => responses[area as keyof typeof responses] === false);
 
-  // Get areas that selected options 1-4 (for 1.a(ii) and 1.a(iii))
   const getOptions1to4 = () => yesAreas1ai.filter((area) => {
     const value = responses[area as keyof typeof responses];
     return value !== null && value !== '5';
   });
 
-  // Validation: Ensure all areas have a selection
   const validateAllFieldsSelected = (areas: string[]) => {
     for (const area of areas) {
       if (responses[area as keyof typeof responses] === null) {
@@ -590,38 +779,33 @@ const SurveyPage = () => {
   };
 
   const handleNext = () => {
-    
     const currentQuestion = questions[currentQuestionIndex];
 
     if (currentQuestion.id === '1a') {
-      // Validate all fields for 1.a
       if (!validateAllFieldsSelected(activeAreas)) {
         setError('Please select Yes or No for all areas.');
-        return; // Stop here if validation fails
+        return;
       }
       const yesAreas = getYesAreas();
-      setActiveAreas(yesAreas); // Remove areas that selected "No" from active areas
+      setActiveAreas(yesAreas);
     } else if (currentQuestion.id === '1ai') {
-      // Validate Yes/No fields for filtered areas in 1.a(i)
       if (!validateAllFieldsSelected(activeAreas)) {
         setError('Please select Yes or No for all areas.');
-        return; // Stop here if validation fails
+        return;
       }
-      setYesAreas1ai(getYesAreas()); // Set Yes areas for 1a(ii)
-      setNoAreas1ai(getNoAreas());   // Set No areas for 1a(iv)
+      setYesAreas1ai(getYesAreas());
+      setNoAreas1ai(getNoAreas());
     } else if (currentQuestion.id === '1aii') {
-      // Validate multi-option fields for 1.a(ii)
       if (!validateAllFieldsSelected(yesAreas1ai)) {
         setError('Please select an option for all areas.');
-        return; // Stop here if validation fails
+        return;
       }
-      const areasFor1aiii = getOptions1to4(); // Only areas with option 1-4 proceed
-      setFinalAreas1aiii(areasFor1aiii); // Set final areas for 1.a(iii)
+      const areasFor1aiii = getOptions1to4();
+      setFinalAreas1aiii(areasFor1aiii);
     }
 
-    // Move to the next question
     setCurrentQuestionIndex((prevIndex) => prevIndex + 1);
-    setError(null); // Clear error when moving to next question
+    setError(null);
   };
 
   const handleBack = () => {
@@ -633,69 +817,113 @@ const SurveyPage = () => {
   const renderQuestion = () => {
     const currentQuestion = questions[currentQuestionIndex];
 
+    // const renderYesNoRadios = (areas: string[]) => (
+    //   areas.map((area) => (
+    //     <div key={area} className="flex items-center mb-2">
+    //       <label className="text-blue-800 mr-2">{area}</label>
+    //       <input
+    //         type="radio"
+    //         name={`yesno-${area}`}
+    //         value="yes"
+    //         checked={responses[area as keyof typeof responses] === true}
+    //         onChange={() => handleYesNoChange(area, true)}
+    //         className="text-blue-500 mr-1"
+    //       />
+    //       Yes
+    //       <input
+    //         type="radio"
+    //         name={`yesno-${area}`}
+    //         value="no"
+    //         checked={responses[area as keyof typeof responses] === false}
+    //         onChange={() => handleYesNoChange(area, false)}
+    //         className="text-blue-500 ml-2 mr-1"
+    //       />
+    //       No
+    //     </div>
+    //   ))
+    // );
+
     const renderYesNoRadios = (areas: string[]) => (
       areas.map((area) => (
-        <div key={area}>
-          <label>{area}</label>
-          <input
-            type="radio"
-            name={`yesno-${area}`}
-            value="yes"
-            checked={responses[area as keyof typeof responses] === true}
-            onChange={() => handleYesNoChange(area, true)}
-          />
-          Yes
-          <input
-            type="radio"
-            name={`yesno-${area}`}
-            value="no"
-            checked={responses[area as keyof typeof responses] === false}
-            onChange={() => handleYesNoChange(area, false)}
-          />
-          No
+        <div key={area} className="flex items-center mb-2">
+          <label className="text-gray-800 mr-2">{area}</label>
+          <div className="flex items-center">
+            <input
+              type="radio"
+              name={`yesno-${area}`}
+              value="yes"
+              checked={responses[area as keyof typeof responses] === true}
+              onChange={() => handleYesNoChange(area, true)}
+              className="mr-1 text-green-500 border-gray-300 focus:ring-green-500" // Style for Yes option
+            />
+            <span className="text-green-600">Yes</span>
+          </div>
+          <div className="flex items-center ml-4">
+            <input
+              type="radio"
+              name={`yesno-${area}`}
+              value="no"
+              checked={responses[area as keyof typeof responses] === false}
+              onChange={() => handleYesNoChange(area, false)}
+              className="mr-1 text-red-500 border-gray-300 focus:ring-red-500" // Style for No option
+            />
+            <span className="text-red-600">No</span>
+          </div>
         </div>
       ))
     );
+    
 
     const renderFiveOptionRadios = (areas: string[]) => (
       areas.map((area) => (
-        <div key={area}>
-          <label>{area}</label>
-          <input type="radio" name={`multi-${area}`} value="1" onChange={() => handleFiveOptionChange(area, "1")} /> Option 1
-          <input type="radio" name={`multi-${area}`} value="2" onChange={() => handleFiveOptionChange(area, "2")} /> Option 2
-          <input type="radio" name={`multi-${area}`} value="3" onChange={() => handleFiveOptionChange(area, "3")} /> Option 3
-          <input type="radio" name={`multi-${area}`} value="4" onChange={() => handleFiveOptionChange(area, "4")} /> Option 4
-          <input type="radio" name={`multi-${area}`} value="5" onChange={() => handleFiveOptionChange(area, "5")} /> Option 5
+        <div key={area} className="flex flex-col mb-4">
+          <label className="text-blue-800 mb-2">{area}</label>
+          <div className=" text-green-500 flex items-center mb-1">
+            <input type="radio" name={`multi-${area}`} value="1" onChange={() => handleFiveOptionChange(area, "1")} className="mr-1" /> Option 1
+          </div>
+          <div className="text-green-500 flex items-center mb-1">
+            <input type="radio" name={`multi-${area}`} value="2" onChange={() => handleFiveOptionChange(area, "2")} className="mr-1" /> Option 2
+          </div>
+          <div className="text-green-500 flex items-center mb-1">
+            <input type="radio" name={`multi-${area}`} value="3" onChange={() => handleFiveOptionChange(area, "3")} className="mr-1" /> Option 3
+          </div>
+          <div className="text-green-500 flex items-center mb-1">
+            <input type="radio" name={`multi-${area}`} value="4" onChange={() => handleFiveOptionChange(area, "4")} className="mr-1" /> Option 4
+          </div>
+          <div className="text-green-500 flex items-center mb-1">
+            <input type="radio" name={`multi-${area}`} value="5" onChange={() => handleFiveOptionChange(area, "5")} className="mr-1" /> Option 5
+          
+          </div>
         </div>
       ))
     );
 
     switch (currentQuestion.id) {
       case '1':
-        return <div><h3>{currentQuestion.text}</h3>{renderYesNoRadios(Object.keys(responses))}</div>;
+        return <div className="p-4 border rounded shadow"><h3 className="text-blue-500 font-bold mb-4">{currentQuestion.text}</h3>{renderYesNoRadios(Object.keys(responses))}</div>;
       case '1a':
-        return <div><h3>{currentQuestion.text}</h3>{renderYesNoRadios(activeAreas)}</div>;
+        return <div className="p-4 border rounded shadow"><h3 className="text-blue-500 font-bold mb-4">{currentQuestion.text}</h3>{renderYesNoRadios(activeAreas)}</div>;
       case '1ai':
-        return <div><h3>{currentQuestion.text}</h3>{renderYesNoRadios(activeAreas)}</div>;
+        return <div className="p-4 border rounded shadow"><h3 className="text-blue-500 font-bold mb-4">{currentQuestion.text}</h3>{renderYesNoRadios(activeAreas)}</div>;
       case '1aii':
-        return <div><h3>{currentQuestion.text}</h3>{renderFiveOptionRadios(yesAreas1ai)}</div>;
+        return <div className="p-4 border rounded shadow"><h3 className="text-blue-500 font-bold mb-4">{currentQuestion.text}</h3>{renderFiveOptionRadios(yesAreas1ai)}</div>;
       case '1aiii':
-        return <div><h3>{currentQuestion.text}</h3>{renderFiveOptionRadios(finalAreas1aiii)}</div>; // Filtered areas
+        return <div className="p-4 border rounded shadow"><h3 className="text-blue-500 font-bold mb-4">{currentQuestion.text}</h3>{renderFiveOptionRadios(finalAreas1aiii)}</div>;
       case '1aiv':
-        return <div><h3>{currentQuestion.text}</h3>{renderFiveOptionRadios(noAreas1ai)}</div>; // Correctly render No areas from 1.a(i)
+        return <div className="p-4 border rounded shadow"><h3 className="text-blue-500 font-bold mb-4">{currentQuestion.text}</h3>{renderFiveOptionRadios(noAreas1ai)}</div>;
       default:
         return <p>No more questions.</p>;
     }
   };
 
   return (
-    <div>
+    <div className="max-w-md mx-auto mt-8 p-6 border rounded-lg shadow-lg bg-white">
       {renderQuestion()}
-      {error && <p style={{ color: 'red' }}>{error}</p>}
-      <div>
-        {currentQuestionIndex > 0 && <button onClick={handleBack}>Back</button>}
-        {currentQuestionIndex < questions.length - 1 && <button onClick={handleNext}>Next</button>}
-        {currentQuestionIndex === questions.length - 1 && <button>Submit</button>}
+      {error && <p className="text-red-500">{error}</p>}
+      <div className="mt-4 flex justify-between">
+        {currentQuestionIndex > 0 && <button onClick={handleBack} className="bg-gray-300 hover:bg-gray-400 text-black py-2 px-4 rounded">Back</button>}
+        {currentQuestionIndex < questions.length - 1 && <button onClick={handleNext} className="bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded">Next</button>}
+        {currentQuestionIndex === questions.length - 1 && <button className="bg-green-500 hover:bg-green-600 text-white py-2 px-4 rounded">Submit</button>}
       </div>
     </div>
   );

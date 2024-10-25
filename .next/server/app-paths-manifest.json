@@ -1,0 +1,5 @@
+{
+  "/page": "app/page.js",
+  "/datacollectionques/page": "app/datacollectionques/page.js",
+  "/dataopenessandflow/page": "app/dataopenessandflow/page.js"
+}
