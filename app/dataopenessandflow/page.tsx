@@ -731,6 +731,19 @@ const SurveyPage = () => {
     UOM: null,
   });
 
+  type AreaNames = 'UrbanWSS' | 'USSM' | 'RWSSM' | 'RSSM' | 'FM' | 'RF' | 'UOM';
+
+  const areaFullNames: Record<AreaNames, string> = {
+    UrbanWSS: "Urban Water Supply Sector Monitoring",
+    USSM: "Urban Sanitation Sector Monitoring",
+    RWSSM: "Rural Water Supply Sector Monitoring",
+    RSSM: "Rural Sanitation Sector Monitoring",
+    FM: "Finance",
+    RF: "Regulation",
+    UOM: "Utility Operations",
+  };
+  
+
 const optionsForQuestion1aii = [
   "1. Poorly defined and inconsistently used, causing fragmented data practices.", 
   "2. Some definition and use, but still uneven and not well-aligned with strategies.", 
@@ -757,12 +770,10 @@ const optionsForQuestion1aiv = [
 
 // Use these labels for each question
 
-  const [yesAreas1ai, setYesAreas1ai] = useState<string[]>([]);
-  const [noAreas1ai, setNoAreas1ai] = useState<string[]>([]);
-  const [activeAreas, setActiveAreas] = useState<string[]>(Object.keys(responses));
-
-  const [yesAreas1aii, setYesAreas1aii] = useState<string[]>([]);
-  const [finalAreas1aiii, setFinalAreas1aiii] = useState<string[]>([]);
+  const [yesAreas1ai, setYesAreas1ai] = useState<AreaNames[]>([]);
+  const [noAreas1ai, setNoAreas1ai] = useState<AreaNames[]>([]);
+  const [activeAreas, setActiveAreas] = useState<AreaNames[]>(Object.keys(responses) as AreaNames[]);
+  const [finalAreas1aiii, setFinalAreas1aiii] = useState<AreaNames[]>([]);
 
   const questions = [
     { id: '1', text: '1.0: Does your organisation collect primary data?' },
@@ -875,36 +886,66 @@ const optionsForQuestion1aiv = [
     //   ))
     // );
 
-    const renderYesNoRadios = (areas: string[]) => (
+    // const renderYesNoRadios = (areas: string[]) => (
+    //   areas.map((area) => (
+    //     <div key={area} className="flex items-center mb-2">
+    //       <label className="text-gray-800 mr-2">{area}</label>
+    //       <div className="flex items-center">
+    //         <input
+    //           type="radio"
+    //           name={`yesno-${area}`}
+    //           value="yes"
+    //           checked={responses[area as keyof typeof responses] === true}
+    //           onChange={() => handleYesNoChange(area, true)}
+    //           className="mr-1 text-green-500 border-gray-300 focus:ring-green-500" // Style for Yes option
+    //         />
+    //         <span className="text-green-600">Yes</span>
+    //       </div>
+    //       <div className="flex items-center ml-4">
+    //         <input
+    //           type="radio"
+    //           name={`yesno-${area}`}
+    //           value="no"
+    //           checked={responses[area as keyof typeof responses] === false}
+    //           onChange={() => handleYesNoChange(area, false)}
+    //           className="mr-1 text-red-500 border-gray-300 focus:ring-red-500" // Style for No option
+    //         />
+    //         <span className="text-red-600">No</span>
+    //       </div>
+    //     </div>
+    //   ))
+    // );
+
+    const renderYesNoRadios = (areas: AreaNames[]) => (
       areas.map((area) => (
         <div key={area} className="flex items-center mb-2">
-          <label className="text-gray-800 mr-2">{area}</label>
+          <label className="text-gray-800 mr-2">{areaFullNames[area]}</label> {/* No more error */}
           <div className="flex items-center">
             <input
-              type="radio"
-              name={`yesno-${area}`}
-              value="yes"
-              checked={responses[area as keyof typeof responses] === true}
-              onChange={() => handleYesNoChange(area, true)}
-              className="mr-1 text-green-500 border-gray-300 focus:ring-green-500" // Style for Yes option
-            />
-            <span className="text-green-600">Yes</span>
+            type="radio"
+            name={`yesno-${area}`}
+            value="yes"
+            checked={responses[area as keyof typeof responses] === true}
+            onChange={() => handleYesNoChange(area, true)}
+            className="mr-1 text-green-500 border-gray-300 focus:ring-green-500" // Style for Yes option
+          />
+          <span className="text-green-600">Yes</span>
           </div>
-          <div className="flex items-center ml-4">
+          <div>
             <input
-              type="radio"
-              name={`yesno-${area}`}
-              value="no"
-              checked={responses[area as keyof typeof responses] === false}
-              onChange={() => handleYesNoChange(area, false)}
-              className="mr-1 text-red-500 border-gray-300 focus:ring-red-500" // Style for No option
-            />
-            <span className="text-red-600">No</span>
+            type="radio"
+            name={`yesno-${area}`}
+            value="no"
+            checked={responses[area as keyof typeof responses] === false}
+            onChange={() => handleYesNoChange(area, false)}
+            className="mr-1 text-red-500 border-gray-300 focus:ring-red-500" // Style for No option
+          />
+          <span className="text-red-600">No</span>
           </div>
+          
         </div>
       ))
     );
-    
 
     // const renderFiveOptionRadios = (areas: string[]) => (
     //   areas.map((area) => (
@@ -952,7 +993,7 @@ const optionsForQuestion1aiv = [
 
     switch (currentQuestion.id) {
       case '1':
-        return <div className="p-4 border rounded shadow"><h3 className="text-blue-500 font-bold mb-4">{currentQuestion.text}</h3>{renderYesNoRadios(Object.keys(responses))}</div>;
+        return <div className="p-4 border rounded shadow"><h3 className="text-blue-500 font-bold mb-4">{currentQuestion.text}</h3>{renderYesNoRadios(Object.keys(responses)as AreaNames[])}</div>;
       case '1a':
         return <div className="p-4 border rounded shadow"><h3 className="text-blue-500 font-bold mb-4">{currentQuestion.text}</h3>{renderYesNoRadios(activeAreas)}</div>;
       case '1ai':
