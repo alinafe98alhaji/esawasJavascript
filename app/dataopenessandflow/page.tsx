@@ -716,11 +716,13 @@
 import { useState } from 'react';
 
 const SurveyPage = () => {
+
+  const [isDarkMode, setIsDarkMode] = useState(false);
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [error, setError] = useState<string | null>(null);
 
   const [responses, setResponses] = useState({
-    UWSS: null,
+    UrbanWSS: null,
     USSM: null,
     RWSSM: null,
     RSSM: null,
@@ -728,6 +730,32 @@ const SurveyPage = () => {
     RF: null,
     UOM: null,
   });
+
+const optionsForQuestion1aii = [
+  "1. Poorly defined and inconsistently used, causing fragmented data practices.", 
+  "2. Some definition and use, but still uneven and not well-aligned with strategies.", 
+  "3. Growing alignment with national strategies, increasing use, with some inconsistencies remaining.", 
+  "4. Well-defined and widely used, aligned with national strategies, with minor discrepancies.", 
+  "5. Fully developed, universally used, enabling seamless and consistent data practices across all organisations."
+];
+
+const optionsForQuestion1aiii = [
+  "Organisational Priorities: The standards aren't relevant to our organisation's goals", 
+  "Complexity of Standards: The standards are too complex or technical for us.", 
+  "Resource Constraints: We don't have enough money or staff to implement these standards.", 
+  "Resistance to Change: People in the organisation resist changing current practices.", 
+  "others please specify"
+];
+
+const optionsForQuestion1aiv = [
+  "Organisational Priorities: The standards aren't relevant to our organisation's goals", 
+  "Complexity of Standards: The standards are too complex or technical for us.", 
+  "Resource Constraints: We don't have enough money or staff to implement these standards.", 
+  "Resistance to Change: People in the organisation resist changing current practices.", 
+  "others please specify"
+];
+
+// Use these labels for each question
 
   const [yesAreas1ai, setYesAreas1ai] = useState<string[]>([]);
   const [noAreas1ai, setNoAreas1ai] = useState<string[]>([]);
@@ -737,13 +765,17 @@ const SurveyPage = () => {
   const [finalAreas1aiii, setFinalAreas1aiii] = useState<string[]>([]);
 
   const questions = [
-    { id: '1', text: 'Question 1: Select Yes/No for each area' },
-    { id: '1a', text: 'Question 1a: Select Yes/No for each area again' },
-    { id: '1ai', text: 'Question 1a(i): Yes/No again for filtered areas from 1a' },
-    { id: '1aii', text: 'Question 1a(ii): Multi-option for areas from 1a(i) with Yes' },
-    { id: '1aiii', text: 'Question 1a(iii): Multi-option for all areas' },
-    { id: '1aiv', text: 'Question 1a(iv): Multi-option for areas from 1a(i) with No' }
+    { id: '1', text: '1.0: Does your organisation collect primary data?' },
+    { id: '1a', text: '1.a: Is your organisation aware of national guidelines that specify how data should be collected?' },
+    { id: '1ai', text: '1.a.(i): Does your organisation collect data in adherence to these national guidelines?' },
+    { id: '1aii', text: '1.a.(ii): How effective are the guidelines in terms of their development, adoption, and suitability?' },
+    { id: '1aiii', text: '1.a.(iii): Why are guidelines for data collection not fully effective in terms of their development, adoption, and suitability?' },
+    { id: '1aiv', text: '1.a.(iv): Why does your organisation not collect data in adherence to these guidelines?' }
   ];
+
+  const toggleDarkMode = () => {
+  setIsDarkMode((prevMode) => !prevMode);
+};
 
   const handleYesNoChange = (area: string, value: boolean) => {
     setResponses((prevResponses) => ({
@@ -874,29 +906,49 @@ const SurveyPage = () => {
     );
     
 
-    const renderFiveOptionRadios = (areas: string[]) => (
+    // const renderFiveOptionRadios = (areas: string[]) => (
+    //   areas.map((area) => (
+    //     <div key={area} className="flex flex-col mb-4">
+    //       <label className="text-blue-800 mb-2">{area}</label>
+    //       <div className=" text-green-500 flex items-center mb-1">
+    //         <input type="radio" name={`multi-${area}`} value="1" onChange={() => handleFiveOptionChange(area, "1")} className="mr-1" /> Option 1
+    //       </div>
+    //       <div className="text-green-500 flex items-center mb-1">
+    //         <input type="radio" name={`multi-${area}`} value="2" onChange={() => handleFiveOptionChange(area, "2")} className="mr-1" /> Option 2
+    //       </div>
+    //       <div className="text-green-500 flex items-center mb-1">
+    //         <input type="radio" name={`multi-${area}`} value="3" onChange={() => handleFiveOptionChange(area, "3")} className="mr-1" /> Option 3
+    //       </div>
+    //       <div className="text-green-500 flex items-center mb-1">
+    //         <input type="radio" name={`multi-${area}`} value="4" onChange={() => handleFiveOptionChange(area, "4")} className="mr-1" /> Option 4
+    //       </div>
+    //       <div className="text-green-500 flex items-center mb-1">
+    //         <input type="radio" name={`multi-${area}`} value="5" onChange={() => handleFiveOptionChange(area, "5")} className="mr-1" /> Option 5 
+    //       </div>
+    //     </div>
+    //   ))
+    // );
+
+    const renderFiveOptionRadios = (areas: string[], options: string[]) => (
       areas.map((area) => (
         <div key={area} className="flex flex-col mb-4">
           <label className="text-blue-800 mb-2">{area}</label>
-          <div className=" text-green-500 flex items-center mb-1">
-            <input type="radio" name={`multi-${area}`} value="1" onChange={() => handleFiveOptionChange(area, "1")} className="mr-1" /> Option 1
-          </div>
-          <div className="text-green-500 flex items-center mb-1">
-            <input type="radio" name={`multi-${area}`} value="2" onChange={() => handleFiveOptionChange(area, "2")} className="mr-1" /> Option 2
-          </div>
-          <div className="text-green-500 flex items-center mb-1">
-            <input type="radio" name={`multi-${area}`} value="3" onChange={() => handleFiveOptionChange(area, "3")} className="mr-1" /> Option 3
-          </div>
-          <div className="text-green-500 flex items-center mb-1">
-            <input type="radio" name={`multi-${area}`} value="4" onChange={() => handleFiveOptionChange(area, "4")} className="mr-1" /> Option 4
-          </div>
-          <div className="text-green-500 flex items-center mb-1">
-            <input type="radio" name={`multi-${area}`} value="5" onChange={() => handleFiveOptionChange(area, "5")} className="mr-1" /> Option 5
-          
-          </div>
+          {options.map((option, index) => (
+            <div key={`${area}-${index}`} className="text-green-500 flex items-center mb-1">
+              <input
+                type="radio"
+                name={`multi-${area}`}
+                value={String(index + 1)}
+                onChange={() => handleFiveOptionChange(area, String(index + 1))}
+                className="mr-1"
+              />
+              {option}
+            </div>
+          ))}
         </div>
       ))
     );
+    
 
     switch (currentQuestion.id) {
       case '1':
@@ -906,11 +958,11 @@ const SurveyPage = () => {
       case '1ai':
         return <div className="p-4 border rounded shadow"><h3 className="text-blue-500 font-bold mb-4">{currentQuestion.text}</h3>{renderYesNoRadios(activeAreas)}</div>;
       case '1aii':
-        return <div className="p-4 border rounded shadow"><h3 className="text-blue-500 font-bold mb-4">{currentQuestion.text}</h3>{renderFiveOptionRadios(yesAreas1ai)}</div>;
+        return <div className="p-4 border rounded shadow"><h3 className="text-blue-500 font-bold mb-4">{currentQuestion.text}</h3>{renderFiveOptionRadios(yesAreas1ai, optionsForQuestion1aii)}</div>;
       case '1aiii':
-        return <div className="p-4 border rounded shadow"><h3 className="text-blue-500 font-bold mb-4">{currentQuestion.text}</h3>{renderFiveOptionRadios(finalAreas1aiii)}</div>;
+        return <div className="p-4 border rounded shadow"><h3 className="text-blue-500 font-bold mb-4">{currentQuestion.text}</h3>{renderFiveOptionRadios(finalAreas1aiii, optionsForQuestion1aiii)}</div>;
       case '1aiv':
-        return <div className="p-4 border rounded shadow"><h3 className="text-blue-500 font-bold mb-4">{currentQuestion.text}</h3>{renderFiveOptionRadios(noAreas1ai)}</div>;
+        return <div className="p-4 border rounded shadow"><h3 className="text-blue-500 font-bold mb-4">{currentQuestion.text}</h3>{renderFiveOptionRadios(noAreas1ai, optionsForQuestion1aiv)}</div>;
       default:
         return <p>No more questions.</p>;
     }
