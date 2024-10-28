@@ -711,6 +711,314 @@
 --------------------------------------------------------------------------------------
 */
 
+// 'use client';
+
+// import { useState } from 'react';
+
+// const SurveyPage = () => {
+
+//   const [isDarkMode, setIsDarkMode] = useState(false);
+//   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
+//   const [error, setError] = useState<string | null>(null);
+
+//   const [responses, setResponses] = useState({
+//     UrbanWSS: null,
+//     USSM: null,
+//     RWSSM: null,
+//     RSSM: null,
+//     FM: null,
+//     RF: null,
+//     UOM: null,
+//   });
+
+//   type AreaNames = 'UrbanWSS' | 'USSM' | 'RWSSM' | 'RSSM' | 'FM' | 'RF' | 'UOM';
+
+//   const areaFullNames: Record<AreaNames, string> = {
+//     UrbanWSS: "Urban Water Supply Sector Monitoring",
+//     USSM: "Urban Sanitation Sector Monitoring",
+//     RWSSM: "Rural Water Supply Sector Monitoring",
+//     RSSM: "Rural Sanitation Sector Monitoring",
+//     FM: "Finance",
+//     RF: "Regulation",
+//     UOM: "Utility Operations",
+//   };
+  
+
+// const optionsForQuestion1aii = [
+//   "1. Poorly defined and inconsistently used, causing fragmented data practices.", 
+//   "2. Some definition and use, but still uneven and not well-aligned with strategies.", 
+//   "3. Growing alignment with national strategies, increasing use, with some inconsistencies remaining.", 
+//   "4. Well-defined and widely used, aligned with national strategies, with minor discrepancies.", 
+//   "5. Fully developed, universally used, enabling seamless and consistent data practices across all organisations."
+// ];
+
+// const optionsForQuestion1aiii = [
+//   "Organisational Priorities: The standards aren't relevant to our organisation's goals", 
+//   "Complexity of Standards: The standards are too complex or technical for us.", 
+//   "Resource Constraints: We don't have enough money or staff to implement these standards.", 
+//   "Resistance to Change: People in the organisation resist changing current practices.", 
+//   "others please specify"
+// ];
+
+// // Use these labels for each question
+
+//   const [yesAreas1ai, setYesAreas1ai] = useState<AreaNames[]>([]);
+//   const [noAreas1ai, setNoAreas1ai] = useState<AreaNames[]>([]);
+//   const [activeAreas, setActiveAreas] = useState<AreaNames[]>(Object.keys(responses) as AreaNames[]);
+//   const [finalAreas1aiii, setFinalAreas1aiii] = useState<AreaNames[]>([]);
+
+//   const questions = [
+//     { id: '1', text: '1.0: Does your organisation collect primary data?' },
+//     { id: '1a', text: '1.a: Is your organisation aware of national guidelines that specify how data should be collected?' },
+//     { id: '1ai', text: '1.a.(i): Does your organisation collect data in adherence to these national guidelines?' },
+//     { id: '1aii', text: '1.a.(ii): How effective are the guidelines in terms of their development, adoption, and suitability?' },
+//     { id: '1aiii', text: '1.a.(iii): Why are guidelines for data collection not fully effective in terms of their development, adoption, and suitability?' },
+//     { id: '1aiv', text: '1.a.(iv): Why does your organisation not collect data in adherence to these guidelines?' }
+//   ];
+
+//   const toggleDarkMode = () => {
+//   setIsDarkMode((prevMode) => !prevMode);
+// };
+
+//   const handleYesNoChange = (area: string, value: boolean) => {
+//     setResponses((prevResponses) => ({
+//       ...prevResponses,
+//       [area]: value,
+//     }));
+//     setError(null);
+//   };
+
+//   const handleFiveOptionChange = (area: string, value: string) => {
+//     setResponses((prevResponses) => ({
+//       ...prevResponses,
+//       [area]: value,
+//     }));
+//     setError(null);
+//   };
+
+//   const getYesAreas = () => activeAreas.filter((area) => responses[area as keyof typeof responses] === true);
+//   const getNoAreas = () => activeAreas.filter((area) => responses[area as keyof typeof responses] === false);
+
+//   const getOptions1to4 = () => yesAreas1ai.filter((area) => {
+//     const value = responses[area as keyof typeof responses];
+//     return value !== null && value !== '5';
+//   });
+
+//   const validateAllFieldsSelected = (areas: string[]) => {
+//     for (const area of areas) {
+//       if (responses[area as keyof typeof responses] === null) {
+//         return false;
+//       }
+//     }
+//     return true;
+//   };
+
+//   const handleNext = () => {
+//     const currentQuestion = questions[currentQuestionIndex];
+
+//     if (currentQuestion.id === '1a') {
+//       if (!validateAllFieldsSelected(activeAreas)) {
+//         setError('Please select Yes or No for all areas.');
+//         return;
+//       }
+//       const yesAreas = getYesAreas();
+//       setActiveAreas(yesAreas);
+//     } else if (currentQuestion.id === '1ai') {
+//       if (!validateAllFieldsSelected(activeAreas)) {
+//         setError('Please select Yes or No for all areas.');
+//         return;
+//       }
+//       setYesAreas1ai(getYesAreas());
+//       setNoAreas1ai(getNoAreas());
+//     } else if (currentQuestion.id === '1aii') {
+//       if (!validateAllFieldsSelected(yesAreas1ai)) {
+//         setError('Please select an option for all areas.');
+//         return;
+//       }
+//       const areasFor1aiii = getOptions1to4();
+//       setFinalAreas1aiii(areasFor1aiii);
+//     }
+
+//     setCurrentQuestionIndex((prevIndex) => prevIndex + 1);
+//     setError(null);
+//   };
+
+//   const handleBack = () => {
+//     if (currentQuestionIndex > 0) {
+//       setCurrentQuestionIndex((prevIndex) => prevIndex - 1);
+//     }
+//   };
+
+//   const renderQuestion = () => {
+//     const currentQuestion = questions[currentQuestionIndex];
+
+//     // const renderYesNoRadios = (areas: string[]) => (
+//     //   areas.map((area) => (
+//     //     <div key={area} className="flex items-center mb-2">
+//     //       <label className="text-blue-800 mr-2">{area}</label>
+//     //       <input
+//     //         type="radio"
+//     //         name={`yesno-${area}`}
+//     //         value="yes"
+//     //         checked={responses[area as keyof typeof responses] === true}
+//     //         onChange={() => handleYesNoChange(area, true)}
+//     //         className="text-blue-500 mr-1"
+//     //       />
+//     //       Yes
+//     //       <input
+//     //         type="radio"
+//     //         name={`yesno-${area}`}
+//     //         value="no"
+//     //         checked={responses[area as keyof typeof responses] === false}
+//     //         onChange={() => handleYesNoChange(area, false)}
+//     //         className="text-blue-500 ml-2 mr-1"
+//     //       />
+//     //       No
+//     //     </div>
+//     //   ))
+//     // );
+
+//     // const renderYesNoRadios = (areas: string[]) => (
+//     //   areas.map((area) => (
+//     //     <div key={area} className="flex items-center mb-2">
+//     //       <label className="text-gray-800 mr-2">{area}</label>
+//     //       <div className="flex items-center">
+//     //         <input
+//     //           type="radio"
+//     //           name={`yesno-${area}`}
+//     //           value="yes"
+//     //           checked={responses[area as keyof typeof responses] === true}
+//     //           onChange={() => handleYesNoChange(area, true)}
+//     //           className="mr-1 text-green-500 border-gray-300 focus:ring-green-500" // Style for Yes option
+//     //         />
+//     //         <span className="text-green-600">Yes</span>
+//     //       </div>
+//     //       <div className="flex items-center ml-4">
+//     //         <input
+//     //           type="radio"
+//     //           name={`yesno-${area}`}
+//     //           value="no"
+//     //           checked={responses[area as keyof typeof responses] === false}
+//     //           onChange={() => handleYesNoChange(area, false)}
+//     //           className="mr-1 text-red-500 border-gray-300 focus:ring-red-500" // Style for No option
+//     //         />
+//     //         <span className="text-red-600">No</span>
+//     //       </div>
+//     //     </div>
+//     //   ))
+//     // );
+
+//     const renderYesNoRadios = (areas: AreaNames[]) => (
+//       areas.map((area) => (
+//         <div key={area} className="flex items-center mb-2">
+//           <label className="text-gray-800 mr-2">{areaFullNames[area]}</label> {/* No more error */}
+//           <div className="flex items-center">
+//             <input
+//             type="radio"
+//             name={`yesno-${area}`}
+//             value="yes"
+//             checked={responses[area as keyof typeof responses] === true}
+//             onChange={() => handleYesNoChange(area, true)}
+//             className="mr-1 text-green-500 border-gray-300 focus:ring-green-500" // Style for Yes option
+//           />
+//           <span className="text-green-600">Yes</span>
+//           </div>
+//           <div>
+//             <input
+//             type="radio"
+//             name={`yesno-${area}`}
+//             value="no"
+//             checked={responses[area as keyof typeof responses] === false}
+//             onChange={() => handleYesNoChange(area, false)}
+//             className="mr-1 text-red-500 border-gray-300 focus:ring-red-500" // Style for No option
+//           />
+//           <span className="text-red-600">No</span>
+//           </div>
+          
+//         </div>
+//       ))
+//     );
+
+//     // const renderFiveOptionRadios = (areas: string[]) => (
+//     //   areas.map((area) => (
+//     //     <div key={area} className="flex flex-col mb-4">
+//     //       <label className="text-blue-800 mb-2">{area}</label>
+//     //       <div className=" text-green-500 flex items-center mb-1">
+//     //         <input type="radio" name={`multi-${area}`} value="1" onChange={() => handleFiveOptionChange(area, "1")} className="mr-1" /> Option 1
+//     //       </div>
+//     //       <div className="text-green-500 flex items-center mb-1">
+//     //         <input type="radio" name={`multi-${area}`} value="2" onChange={() => handleFiveOptionChange(area, "2")} className="mr-1" /> Option 2
+//     //       </div>
+//     //       <div className="text-green-500 flex items-center mb-1">
+//     //         <input type="radio" name={`multi-${area}`} value="3" onChange={() => handleFiveOptionChange(area, "3")} className="mr-1" /> Option 3
+//     //       </div>
+//     //       <div className="text-green-500 flex items-center mb-1">
+//     //         <input type="radio" name={`multi-${area}`} value="4" onChange={() => handleFiveOptionChange(area, "4")} className="mr-1" /> Option 4
+//     //       </div>
+//     //       <div className="text-green-500 flex items-center mb-1">
+//     //         <input type="radio" name={`multi-${area}`} value="5" onChange={() => handleFiveOptionChange(area, "5")} className="mr-1" /> Option 5 
+//     //       </div>
+//     //     </div>
+//     //   ))
+//     // );
+
+//     const renderFiveOptionRadios = (areas: string[], options: string[]) => (
+//       areas.map((area) => (
+//         <div key={area} className="flex flex-col mb-4">
+//           <label className="text-blue-800 mb-2">{area}</label>
+//           {options.map((option, index) => (
+//             <div key={`${area}-${index}`} className="text-green-500 flex items-center mb-1">
+//               <input
+//                 type="radio"
+//                 name={`multi-${area}`}
+//                 value={String(index + 1)}
+//                 onChange={() => handleFiveOptionChange(area, String(index + 1))}
+//                 className="mr-1"
+//               />
+//               {option}
+//             </div>
+//           ))}
+//         </div>
+//       ))
+//     );
+    
+
+//     switch (currentQuestion.id) {
+//       case '1':
+//         return <div className="p-4 border rounded shadow"><h3 className="text-blue-500 font-bold mb-4">{currentQuestion.text}</h3>{renderYesNoRadios(Object.keys(responses)as AreaNames[])}</div>;
+//       case '1a':
+//         return <div className="p-4 border rounded shadow"><h3 className="text-blue-500 font-bold mb-4">{currentQuestion.text}</h3>{renderYesNoRadios(activeAreas)}</div>;
+//       case '1ai':
+//         return <div className="p-4 border rounded shadow"><h3 className="text-blue-500 font-bold mb-4">{currentQuestion.text}</h3>{renderYesNoRadios(activeAreas)}</div>;
+//       case '1aii':
+//         return <div className="p-4 border rounded shadow"><h3 className="text-blue-500 font-bold mb-4">{currentQuestion.text}</h3>{renderFiveOptionRadios(yesAreas1ai, optionsForQuestion1aii)}</div>;
+//       case '1aiii':
+//         return <div className="p-4 border rounded shadow"><h3 className="text-blue-500 font-bold mb-4">{currentQuestion.text}</h3>{renderFiveOptionRadios(finalAreas1aiii, optionsForQuestion1aiii)}</div>;
+//       case '1aiv':
+//         return <div className="p-4 border rounded shadow"><h3 className="text-blue-500 font-bold mb-4">{currentQuestion.text}</h3>{renderFiveOptionRadios(noAreas1ai, optionsForQuestion1aiii)}</div>;
+//       default:
+//         return <p>No more questions.</p>;
+//     }
+//   };
+
+//   return (
+//     <div className="max-w-md mx-auto mt-8 p-6 border rounded-lg shadow-lg bg-white">
+//       {renderQuestion()}
+//       {error && <p className="text-red-500">{error}</p>}
+//       <div className="mt-4 flex justify-between">
+//         {currentQuestionIndex > 0 && <button onClick={handleBack} className="bg-gray-300 hover:bg-gray-400 text-black py-2 px-4 rounded">Back</button>}
+//         {currentQuestionIndex < questions.length - 1 && <button onClick={handleNext} className="bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded">Next</button>}
+//         {currentQuestionIndex === questions.length - 1 && <button className="bg-green-500 hover:bg-green-600 text-white py-2 px-4 rounded">Submit</button>}
+//       </div>
+//     </div>
+//   );
+// };
+
+// export default SurveyPage;
+//--------------------------------------------------
+//--------------------------------------------------
+//--------------------------------------------------
+
 'use client';
 
 import { useState } from 'react';
@@ -742,36 +1050,23 @@ const SurveyPage = () => {
     RF: "Regulation",
     UOM: "Utility Operations",
   };
-  
 
-const optionsForQuestion1aii = [
-  "1. Poorly defined and inconsistently used, causing fragmented data practices.", 
-  "2. Some definition and use, but still uneven and not well-aligned with strategies.", 
-  "3. Growing alignment with national strategies, increasing use, with some inconsistencies remaining.", 
-  "4. Well-defined and widely used, aligned with national strategies, with minor discrepancies.", 
-  "5. Fully developed, universally used, enabling seamless and consistent data practices across all organisations."
-];
+  const optionsForQuestion1aii = [
+    "1. Poorly defined and inconsistently used, causing fragmented data practices.", 
+    "2. Some definition and use, but still uneven and not well-aligned with strategies.", 
+    "3. Growing alignment with national strategies, increasing use, with some inconsistencies remaining.", 
+    "4. Well-defined and widely used, aligned with national strategies, with minor discrepancies.", 
+    "5. Fully developed, universally used, enabling seamless and consistent data practices across all organisations."
+  ];
 
-const optionsForQuestion1aiii = [
-  "Organisational Priorities: The standards aren't relevant to our organisation's goals", 
-  "Complexity of Standards: The standards are too complex or technical for us.", 
-  "Resource Constraints: We don't have enough money or staff to implement these standards.", 
-  "Resistance to Change: People in the organisation resist changing current practices.", 
-  "others please specify"
-];
+  const optionsForQuestion1aiii = [
+    "Organisational Priorities: The standards aren't relevant to our organisation's goals", 
+    "Complexity of Standards: The standards are too complex or technical for us.", 
+    "Resource Constraints: We don't have enough money or staff to implement these standards.", 
+    "Resistance to Change: People in the organisation resist changing current practices.", 
+    "Others, please specify"
+  ];
 
-const optionsForQuestion1aiv = [
-  "Organisational Priorities: The standards aren't relevant to our organisation's goals", 
-  "Complexity of Standards: The standards are too complex or technical for us.", 
-  "Resource Constraints: We don't have enough money or staff to implement these standards.", 
-  "Resistance to Change: People in the organisation resist changing current practices.", 
-  "others please specify"
-];
-
-// Use these labels for each question
-
-  const [yesAreas1ai, setYesAreas1ai] = useState<AreaNames[]>([]);
-  const [noAreas1ai, setNoAreas1ai] = useState<AreaNames[]>([]);
   const [activeAreas, setActiveAreas] = useState<AreaNames[]>(Object.keys(responses) as AreaNames[]);
   const [finalAreas1aiii, setFinalAreas1aiii] = useState<AreaNames[]>([]);
 
@@ -785,8 +1080,8 @@ const optionsForQuestion1aiv = [
   ];
 
   const toggleDarkMode = () => {
-  setIsDarkMode((prevMode) => !prevMode);
-};
+    setIsDarkMode((prevMode) => !prevMode);
+  };
 
   const handleYesNoChange = (area: string, value: boolean) => {
     setResponses((prevResponses) => ({
@@ -804,178 +1099,110 @@ const optionsForQuestion1aiv = [
     setError(null);
   };
 
+  const validateAllFieldsSelected = (areas: AreaNames[]) => {
+    return areas.every((area) => responses[area] !== null);
+  };
+
   const getYesAreas = () => activeAreas.filter((area) => responses[area as keyof typeof responses] === true);
   const getNoAreas = () => activeAreas.filter((area) => responses[area as keyof typeof responses] === false);
-
-  const getOptions1to4 = () => yesAreas1ai.filter((area) => {
-    const value = responses[area as keyof typeof responses];
-    return value !== null && value !== '5';
-  });
-
-  const validateAllFieldsSelected = (areas: string[]) => {
-    for (const area of areas) {
-      if (responses[area as keyof typeof responses] === null) {
-        return false;
-      }
-    }
-    return true;
-  };
+  const getOptions1to4 = () => getYesAreas().filter((area) => responses[area as keyof typeof responses] !== '5');
 
   const handleNext = () => {
     const currentQuestion = questions[currentQuestionIndex];
-
-    if (currentQuestion.id === '1a') {
+  
+    // Specific validation for question '1'
+    if (currentQuestion.id === '1') {
+      // Check all areas in `responses` to ensure no null values
+      const allAreasSelected = Object.keys(responses).every(
+        (area) => responses[area as AreaNames] !== null
+      );
+  
+      if (!allAreasSelected) {
+        setError('Please select Yes or No for all areas.');
+        return;
+      }
+      setActiveAreas(Object.keys(responses) as AreaNames[]); // Initialize active areas for subsequent questions
+    }
+  
+    // Proceed with other questions using `activeAreas` as initially coded
+    else if (currentQuestion.id === '1a') {
       if (!validateAllFieldsSelected(activeAreas)) {
         setError('Please select Yes or No for all areas.');
         return;
       }
-      const yesAreas = getYesAreas();
-      setActiveAreas(yesAreas);
+      setActiveAreas(getYesAreas());
     } else if (currentQuestion.id === '1ai') {
       if (!validateAllFieldsSelected(activeAreas)) {
         setError('Please select Yes or No for all areas.');
         return;
       }
-      setYesAreas1ai(getYesAreas());
-      setNoAreas1ai(getNoAreas());
     } else if (currentQuestion.id === '1aii') {
-      if (!validateAllFieldsSelected(yesAreas1ai)) {
+      const areasFor1aiii = getOptions1to4();
+      if (!validateAllFieldsSelected(getYesAreas())) {
         setError('Please select an option for all areas.');
         return;
       }
-      const areasFor1aiii = getOptions1to4();
       setFinalAreas1aiii(areasFor1aiii);
+    } else if (currentQuestion.id === '1aiii' && !validateAllFieldsSelected(finalAreas1aiii)) {
+      setError('Please select an option for all areas.');
+      return;
+    } else if (currentQuestion.id === '1aiv' && !validateAllFieldsSelected(getNoAreas())) {
+      setError('Please select an option for all areas.');
+      return;
     }
-
+  
+    // Move to the next question if no validation errors
     setCurrentQuestionIndex((prevIndex) => prevIndex + 1);
     setError(null);
   };
+  
 
   const handleBack = () => {
     if (currentQuestionIndex > 0) {
       setCurrentQuestionIndex((prevIndex) => prevIndex - 1);
+      setError(null);
     }
   };
 
   const renderQuestion = () => {
     const currentQuestion = questions[currentQuestionIndex];
 
-    // const renderYesNoRadios = (areas: string[]) => (
-    //   areas.map((area) => (
-    //     <div key={area} className="flex items-center mb-2">
-    //       <label className="text-blue-800 mr-2">{area}</label>
-    //       <input
-    //         type="radio"
-    //         name={`yesno-${area}`}
-    //         value="yes"
-    //         checked={responses[area as keyof typeof responses] === true}
-    //         onChange={() => handleYesNoChange(area, true)}
-    //         className="text-blue-500 mr-1"
-    //       />
-    //       Yes
-    //       <input
-    //         type="radio"
-    //         name={`yesno-${area}`}
-    //         value="no"
-    //         checked={responses[area as keyof typeof responses] === false}
-    //         onChange={() => handleYesNoChange(area, false)}
-    //         className="text-blue-500 ml-2 mr-1"
-    //       />
-    //       No
-    //     </div>
-    //   ))
-    // );
-
-    // const renderYesNoRadios = (areas: string[]) => (
-    //   areas.map((area) => (
-    //     <div key={area} className="flex items-center mb-2">
-    //       <label className="text-gray-800 mr-2">{area}</label>
-    //       <div className="flex items-center">
-    //         <input
-    //           type="radio"
-    //           name={`yesno-${area}`}
-    //           value="yes"
-    //           checked={responses[area as keyof typeof responses] === true}
-    //           onChange={() => handleYesNoChange(area, true)}
-    //           className="mr-1 text-green-500 border-gray-300 focus:ring-green-500" // Style for Yes option
-    //         />
-    //         <span className="text-green-600">Yes</span>
-    //       </div>
-    //       <div className="flex items-center ml-4">
-    //         <input
-    //           type="radio"
-    //           name={`yesno-${area}`}
-    //           value="no"
-    //           checked={responses[area as keyof typeof responses] === false}
-    //           onChange={() => handleYesNoChange(area, false)}
-    //           className="mr-1 text-red-500 border-gray-300 focus:ring-red-500" // Style for No option
-    //         />
-    //         <span className="text-red-600">No</span>
-    //       </div>
-    //     </div>
-    //   ))
-    // );
-
     const renderYesNoRadios = (areas: AreaNames[]) => (
       areas.map((area) => (
         <div key={area} className="flex items-center mb-2">
-          <label className="text-gray-800 mr-2">{areaFullNames[area]}</label> {/* No more error */}
+          <label className="text-blue-800 mr-2">{areaFullNames[area]}</label>
           <div className="flex items-center">
             <input
-            type="radio"
-            name={`yesno-${area}`}
-            value="yes"
-            checked={responses[area as keyof typeof responses] === true}
-            onChange={() => handleYesNoChange(area, true)}
-            className="mr-1 text-green-500 border-gray-300 focus:ring-green-500" // Style for Yes option
-          />
-          <span className="text-green-600">Yes</span>
+              type="radio"
+              name={`yesno-${area}`}
+              value="yes"
+              checked={responses[area] === true}
+              onChange={() => handleYesNoChange(area, true)}
+              className="mr-1 text-green-500 border-gray-300 focus:ring-green-500"
+            />
+            <span className="text-green-600">Yes</span>
           </div>
           <div>
             <input
-            type="radio"
-            name={`yesno-${area}`}
-            value="no"
-            checked={responses[area as keyof typeof responses] === false}
-            onChange={() => handleYesNoChange(area, false)}
-            className="mr-1 text-red-500 border-gray-300 focus:ring-red-500" // Style for No option
-          />
-          <span className="text-red-600">No</span>
+              type="radio"
+              name={`yesno-${area}`}
+              value="no"
+              checked={responses[area] === false}
+              onChange={() => handleYesNoChange(area, false)}
+              className="mr-1 text-red-500 border-gray-300 focus:ring-red-500"
+            />
+            <span className="text-red-600">No</span>
           </div>
-          
         </div>
       ))
     );
 
-    // const renderFiveOptionRadios = (areas: string[]) => (
-    //   areas.map((area) => (
-    //     <div key={area} className="flex flex-col mb-4">
-    //       <label className="text-blue-800 mb-2">{area}</label>
-    //       <div className=" text-green-500 flex items-center mb-1">
-    //         <input type="radio" name={`multi-${area}`} value="1" onChange={() => handleFiveOptionChange(area, "1")} className="mr-1" /> Option 1
-    //       </div>
-    //       <div className="text-green-500 flex items-center mb-1">
-    //         <input type="radio" name={`multi-${area}`} value="2" onChange={() => handleFiveOptionChange(area, "2")} className="mr-1" /> Option 2
-    //       </div>
-    //       <div className="text-green-500 flex items-center mb-1">
-    //         <input type="radio" name={`multi-${area}`} value="3" onChange={() => handleFiveOptionChange(area, "3")} className="mr-1" /> Option 3
-    //       </div>
-    //       <div className="text-green-500 flex items-center mb-1">
-    //         <input type="radio" name={`multi-${area}`} value="4" onChange={() => handleFiveOptionChange(area, "4")} className="mr-1" /> Option 4
-    //       </div>
-    //       <div className="text-green-500 flex items-center mb-1">
-    //         <input type="radio" name={`multi-${area}`} value="5" onChange={() => handleFiveOptionChange(area, "5")} className="mr-1" /> Option 5 
-    //       </div>
-    //     </div>
-    //   ))
-    // );
-
-    const renderFiveOptionRadios = (areas: string[], options: string[]) => (
+    const renderFiveOptionRadios = (areas: AreaNames[], options: string[]) => (
       areas.map((area) => (
         <div key={area} className="flex flex-col mb-4">
-          <label className="text-blue-800 mb-2">{area}</label>
+          <label className="text-blue-800 mb-2">{areaFullNames[area]}</label>
           {options.map((option, index) => (
-            <div key={`${area}-${index}`} className="text-green-500 flex items-center mb-1">
+            <div key={`${area}-${index}`} className="text-red-500 flex items-center mb-1">
               <input
                 type="radio"
                 name={`multi-${area}`}
@@ -989,34 +1216,33 @@ const optionsForQuestion1aiv = [
         </div>
       ))
     );
-    
 
     switch (currentQuestion.id) {
       case '1':
-        return <div className="p-4 border rounded shadow"><h3 className="text-blue-500 font-bold mb-4">{currentQuestion.text}</h3>{renderYesNoRadios(Object.keys(responses)as AreaNames[])}</div>;
+        return <div className="p-4 border rounded shadow"><h3 className="text-blue-500 font-bold mb-4">{currentQuestion.text}</h3>{renderYesNoRadios(Object.keys(responses) as AreaNames[])}</div>;
       case '1a':
         return <div className="p-4 border rounded shadow"><h3 className="text-blue-500 font-bold mb-4">{currentQuestion.text}</h3>{renderYesNoRadios(activeAreas)}</div>;
       case '1ai':
         return <div className="p-4 border rounded shadow"><h3 className="text-blue-500 font-bold mb-4">{currentQuestion.text}</h3>{renderYesNoRadios(activeAreas)}</div>;
       case '1aii':
-        return <div className="p-4 border rounded shadow"><h3 className="text-blue-500 font-bold mb-4">{currentQuestion.text}</h3>{renderFiveOptionRadios(yesAreas1ai, optionsForQuestion1aii)}</div>;
+        return <div className="p-4 border rounded shadow"><h3 className="text-blue-500 font-bold mb-4">{currentQuestion.text}</h3>{renderFiveOptionRadios(getYesAreas(), optionsForQuestion1aii)}</div>;
       case '1aiii':
         return <div className="p-4 border rounded shadow"><h3 className="text-blue-500 font-bold mb-4">{currentQuestion.text}</h3>{renderFiveOptionRadios(finalAreas1aiii, optionsForQuestion1aiii)}</div>;
       case '1aiv':
-        return <div className="p-4 border rounded shadow"><h3 className="text-blue-500 font-bold mb-4">{currentQuestion.text}</h3>{renderFiveOptionRadios(noAreas1ai, optionsForQuestion1aiv)}</div>;
+        return <div className="p-4 border rounded shadow"><h3 className="text-blue-500 font-bold mb-4">{currentQuestion.text}</h3>{renderFiveOptionRadios(getNoAreas(), optionsForQuestion1aiii)}</div>;
       default:
-        return <p>No more questions.</p>;
+        return null;
     }
   };
 
   return (
-    <div className="max-w-md mx-auto mt-8 p-6 border rounded-lg shadow-lg bg-white">
+    <div className={`p-4 ${isDarkMode ? 'bg-gray-800 text-white' : 'bg-white text-black'}`}>
+      <button onClick={toggleDarkMode} className="mb-4 px-4 py-2 bg-blue-500 text-white rounded">{isDarkMode ? 'Light Mode' : 'Dark Mode'}</button>
       {renderQuestion()}
-      {error && <p className="text-red-500">{error}</p>}
+      {error && <div className="text-red-500 mt-4">{error}</div>}
       <div className="mt-4 flex justify-between">
-        {currentQuestionIndex > 0 && <button onClick={handleBack} className="bg-gray-300 hover:bg-gray-400 text-black py-2 px-4 rounded">Back</button>}
-        {currentQuestionIndex < questions.length - 1 && <button onClick={handleNext} className="bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded">Next</button>}
-        {currentQuestionIndex === questions.length - 1 && <button className="bg-green-500 hover:bg-green-600 text-white py-2 px-4 rounded">Submit</button>}
+        <button onClick={handleBack} className="px-4 py-2 bg-gray-300 rounded">Back</button>
+        <button onClick={handleNext} className="px-4 py-2 bg-blue-500 text-white rounded">Next</button>
       </div>
     </div>
   );

@@ -15,11 +15,6 @@
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
       "static/chunks/app/datacollectionques/page.js"
-    ],
-    "/dataopenessandflow/page": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/chunks/app/dataopenessandflow/page.js"
     ]
   }
 }
