@@ -1,4 +1,5 @@
 {
+  "/dataopenessandflow/page": "app/dataopenessandflow/page.js",
   "/datacollectionques/page": "app/datacollectionques/page.js",
-  "/page": "app/page.js"
+  "/dataownershipandmanagement/page": "app/dataownershipandmanagement/page.js"
 }
