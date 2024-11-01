@@ -1,5 +1,5 @@
 {
-  "/dataopenessandflow/page": "app/dataopenessandflow/page.js",
-  "/datacollectionques/page": "app/datacollectionques/page.js",
-  "/dataownershipandmanagement/page": "app/dataownershipandmanagement/page.js"
+  "/dataquality/page": "app/dataquality/page.js",
+  "/dataownershipandmanagement/page": "app/dataownershipandmanagement/page.js",
+  "/favicon.ico/route": "app/favicon.ico/route.js"
 }

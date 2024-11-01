@@ -1,9 +1,9 @@
 {
   "pages": {
-    "/dataopenessandflow/page": [
+    "/dataownershipandmanagement/page": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
-      "static/chunks/app/dataopenessandflow/page.js"
+      "static/chunks/app/dataownershipandmanagement/page.js"
     ],
     "/layout": [
       "static/chunks/webpack.js",
@@ -11,15 +11,15 @@
       "static/css/app/layout.css",
       "static/chunks/app/layout.js"
     ],
-    "/datacollectionques/page": [
+    "/page": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
-      "static/chunks/app/datacollectionques/page.js"
+      "static/chunks/app/page.js"
     ],
-    "/dataownershipandmanagement/page": [
+    "/dataquality/page": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
-      "static/chunks/app/dataownershipandmanagement/page.js"
+      "static/chunks/app/dataquality/page.js"
     ]
   }
 }

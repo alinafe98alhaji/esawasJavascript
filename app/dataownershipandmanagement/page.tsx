@@ -1,9 +1,12 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const SurveyPage = () => {
   const [isDarkMode, setIsDarkMode] = useState(false);
+  const [compiledResponses, setCompiledResponses] = useState<{
+    [key: string]: string;
+  }>({});
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [error, setError] = useState<string | null>(null);
 
@@ -123,9 +126,10 @@ const SurveyPage = () => {
       return value !== null && value !== "5";
     });
 
-  const saveResponsesToJSON = (ident: string) => {
+  const saveResponsesToJSON = () => {
     const json = JSON.stringify(responses, null, 2);
-    console.log(json); // Replace with save logic or API call as needed
+    //console.log(json); // Replace with save logic or API call as needed
+    return json;
   };
 
   // Custom validation functions for specific questions
@@ -138,6 +142,18 @@ const SurveyPage = () => {
       area => typeof responses[area] === "string" && responses[area] !== null
     );
   };
+
+  useEffect(
+    () => {
+      console.log("Updated compiledResponses:", compiledResponses);
+    },
+    [compiledResponses]
+  );
+
+  // const saveResponsesToJSON = () => {
+  //   const json = JSON.stringify(responses, null, 2);
+  //   return json;
+  // };
 
   const handleNext = () => {
     const currentQuestion = questions[currentQuestionIndex];
@@ -181,21 +197,28 @@ const SurveyPage = () => {
       setError("Please select an option for all areas.");
       return;
     } else if (currentQuestion.id === "submit") {
+      const finalResponses = saveResponsesToJSON();
+      console.log(compiledResponses);
       // Add your submit logic here
       alert("Responses submitted!");
       return;
     }
-    saveResponsesToJSON(currentQuestion.id);
+
+    setCompiledResponses(prevCompiled => ({
+      ...prevCompiled,
+      [currentQuestion.id]: saveResponsesToJSON()
+    }));
+
     setCurrentQuestionIndex(prevIndex => prevIndex + 1);
     setError(null);
   };
 
-  const handleBack = () => {
-    if (currentQuestionIndex > 0) {
-      setCurrentQuestionIndex(prevIndex => prevIndex - 1);
-      setError(null);
-    }
-  };
+  // const handleBack = () => {
+  //   if (currentQuestionIndex > 0) {
+  //     setCurrentQuestionIndex(prevIndex => prevIndex - 1);
+  //     setError(null);
+  //   }
+  // };
 
   const renderQuestion = () => {
     const currentQuestion = questions[currentQuestionIndex];
