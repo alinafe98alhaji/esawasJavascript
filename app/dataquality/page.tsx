@@ -1,124 +1,104 @@
 "use client";
 import React, { useState } from "react";
-import { useForm } from "react-hook-form";
 
-type Responses = {
-  question1: string[];
-  question1a: string[];
-  question2: string[];
-  question2a: string[];
-  // Add more questions as needed
+type SurveyQuestionProps = {
+  onSaveResponse: (response: string) => void;
 };
 
-const Survey: React.FC = () => {
-  const { register, handleSubmit, formState: { errors } } = useForm();
-  const [responses, setResponses] = useState<Responses>({
-    question1: [],
-    question1a: [],
-    question2: [],
-    question2a: []
-    // Initialize for all questions
-  });
+const SurveyQuestion: React.FC<SurveyQuestionProps> = ({ onSaveResponse }) => {
+  const [selectedOption, setSelectedOption] = useState<string | null>(null);
+  const [customInput, setCustomInput] = useState<string>("");
 
-  const onSubmit = async (data: any) => {
-    console.log("Form Data: ", data);
-    await saveResponsesToJson();
+  // Handle radio button selection
+  const handleOptionChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const value = event.target.value;
+    setSelectedOption(value);
+    if (value !== "5") {
+      setCustomInput(""); // Clear the custom input if option is not the fifth one
+    }
   };
 
-  const handleNext = (questionKey: keyof Responses, response: string) => {
-    setResponses(prevResponses => ({
-      ...prevResponses,
-      [questionKey]: [...prevResponses[questionKey], response] // Save all responses for the question
-    }));
+  // Handle custom input change
+  const handleCustomInputChange = (
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => {
+    setCustomInput(event.target.value);
   };
 
-  const saveResponsesToJson = async () => {
-    const compiledResponses = {
-      responses
-    };
-
-    await saveToDatabase(compiledResponses);
-  };
-
-  const saveToDatabase = async (data: any) => {
-    console.log("Saving data to database:", data);
-    // Here you would implement your actual database save logic
-    // Example: await fetch('/api/save', { method: 'POST', body: JSON.stringify(data) });
+  // Save response on form submission
+  const handleSubmit = (event: React.FormEvent) => {
+    event.preventDefault();
+    const response = selectedOption === "5" ? customInput : selectedOption;
+    onSaveResponse(response || ""); // Ensure response is a string
   };
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
+    <form onSubmit={handleSubmit}>
       <div>
-        <h2>Question 1: Yes or No?</h2>
         <label>
           <input
             type="radio"
-            value="Yes"
-            {...register("question1")}
-            onChange={() => handleNext("question1", "Yes")}
-          />
-          Yes
-        </label>
-        <label>
-          <input
-            type="radio"
-            value="No"
-            {...register("question1")}
-            onChange={() => handleNext("question1", "No")}
-          />
-          No
-        </label>
-        {errors.question1 && <span>This field is required</span>}
-      </div>
-
-      <div>
-        <h2>Question 1a: Please provide more details</h2>
-        <label>
-          <input
-            type="text"
-            {...register("question1a")}
-            onBlur={e => handleNext("question1a", e.target.value)}
-          />
-        </label>
-      </div>
-
-      <div>
-        <h2>Question 2: Multiple Options</h2>
-        <label>
-          <input
-            type="checkbox"
-            value="Option1"
-            {...register("question2")}
-            onChange={e => handleNext("question2", e.target.value)}
+            value="1"
+            checked={selectedOption === "1"}
+            onChange={handleOptionChange}
           />
           Option 1
         </label>
+      </div>
+      <div>
         <label>
           <input
-            type="checkbox"
-            value="Option2"
-            {...register("question2")}
-            onChange={e => handleNext("question2", e.target.value)}
+            type="radio"
+            value="2"
+            checked={selectedOption === "2"}
+            onChange={handleOptionChange}
           />
           Option 2
         </label>
-        {errors.question2 && <span>This field is required</span>}
       </div>
-
       <div>
-        <h2>Question 2a: Additional Comments</h2>
         <label>
           <input
-            type="text"
-            {...register("question2a")}
-            onBlur={e => handleNext("question2a", e.target.value)}
+            type="radio"
+            value="3"
+            checked={selectedOption === "3"}
+            onChange={handleOptionChange}
           />
+          Option 3
         </label>
       </div>
-
-      <button type="submit">Submit</button>
+      <div>
+        <label>
+          <input
+            type="radio"
+            value="4"
+            checked={selectedOption === "4"}
+            onChange={handleOptionChange}
+          />
+          Option 4
+        </label>
+      </div>
+      <div>
+        <label>
+          <input
+            type="radio"
+            value="5"
+            checked={selectedOption === "5"}
+            onChange={handleOptionChange}
+          />
+          Other (Please specify)
+        </label>
+        {selectedOption === "5" &&
+          <input
+            type="text"
+            value={customInput}
+            onChange={handleCustomInputChange}
+            placeholder="Enter your response"
+          />}
+      </div>
+      <button type="submit">Next</button>
     </form>
   );
 };
 
-export default Survey;
+export default SurveyQuestion;
