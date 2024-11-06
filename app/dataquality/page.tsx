@@ -294,7 +294,6 @@ const SurveyPage = () => {
           <p className="text-red-600">
             {error}
           </p>}
-        //{/* {currentQuestion.id === "1" && renderYesNoRadios(activeAreas)} */}
         {currentQuestion.id === "4a" && renderYesNoRadios(activeAreas)}
         {currentQuestion.id === "4ai" && renderYesNoRadios(activeAreas)}
         {currentQuestion.id === "4aii" &&

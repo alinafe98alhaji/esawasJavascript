@@ -162,7 +162,7 @@ const SurveyPage = () => {
     //     setError("Please answer for all areas.");
     //     return;
     //   }
-    // } else 
+    // } else
     if (currentQuestion.id === "1d") {
       if (!validateYesNoResponses(Object.keys(responses) as AreaNames[])) {
         setError("Please select Yes or No for all areas.");
@@ -300,7 +300,6 @@ const SurveyPage = () => {
           <p className="text-red-600">
             {error}
           </p>}
-        //{/* {currentQuestion.id === "1" && renderYesNoRadios(activeAreas)} */}
         {currentQuestion.id === "1d" && renderYesNoRadios(activeAreas)}
         {currentQuestion.id === "1di" && renderYesNoRadios(activeAreas)}
         {currentQuestion.id === "1dii" &&

@@ -63,8 +63,7 @@ const SurveyPage = () => {
     },
     {
       id: "2bi",
-      text:
-        "2.b.(i): Does your organisation participate in these processes?"
+      text: "2.b.(i): Does your organisation participate in these processes?"
     },
     {
       id: "2bii",
@@ -162,7 +161,7 @@ const SurveyPage = () => {
     //     setError("Please answer for all areas.");
     //     return;
     //   }
-    // } else 
+    // } else
     if (currentQuestion.id === "2b") {
       if (!validateYesNoResponses(Object.keys(responses) as AreaNames[])) {
         setError("Please select Yes or No for all areas.");
@@ -300,7 +299,6 @@ const SurveyPage = () => {
           <p className="text-red-600">
             {error}
           </p>}
-        //{/* {currentQuestion.id === "1" && renderYesNoRadios(activeAreas)} */}
         {currentQuestion.id === "2b" && renderYesNoRadios(activeAreas)}
         {currentQuestion.id === "2bi" && renderYesNoRadios(activeAreas)}
         {currentQuestion.id === "2bii" &&

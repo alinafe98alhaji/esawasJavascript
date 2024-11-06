@@ -63,8 +63,7 @@ const SurveyPage = () => {
     },
     {
       id: "2ci",
-      text:
-        "2.c.(i): Does your organisation always comply with these rules?"
+      text: "2.c.(i): Does your organisation always comply with these rules?"
     },
     {
       id: "2cii",
@@ -162,7 +161,7 @@ const SurveyPage = () => {
     //     setError("Please answer for all areas.");
     //     return;
     //   }
-    // } else 
+    // } else
     if (currentQuestion.id === "2c") {
       if (!validateYesNoResponses(Object.keys(responses) as AreaNames[])) {
         setError("Please select Yes or No for all areas.");
@@ -300,7 +299,6 @@ const SurveyPage = () => {
           <p className="text-red-600">
             {error}
           </p>}
-        //{/* {currentQuestion.id === "1" && renderYesNoRadios(activeAreas)} */}
         {currentQuestion.id === "2c" && renderYesNoRadios(activeAreas)}
         {currentQuestion.id === "2ci" && renderYesNoRadios(activeAreas)}
         {currentQuestion.id === "2cii" &&

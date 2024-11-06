@@ -63,8 +63,7 @@ const SurveyPage = () => {
     },
     {
       id: "2ai",
-      text:
-        "2.a.(i): Does your organisation follow these data ownership rules?"
+      text: "2.a.(i): Does your organisation follow these data ownership rules?"
     },
     {
       id: "2aii",
@@ -294,7 +293,6 @@ const SurveyPage = () => {
           <p className="text-red-600">
             {error}
           </p>}
-        //{/* {currentQuestion.id === "1" && renderYesNoRadios(activeAreas)} */}
         {currentQuestion.id === "2a" && renderYesNoRadios(activeAreas)}
         {currentQuestion.id === "2ai" && renderYesNoRadios(activeAreas)}
         {currentQuestion.id === "2aii" &&

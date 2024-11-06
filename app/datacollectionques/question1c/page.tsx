@@ -157,12 +157,6 @@ const SurveyPage = () => {
   const handleNext = () => {
     const currentQuestion = questions[currentQuestionIndex];
 
-    // if (currentQuestion.id === "1") {
-    //   if (!validateAllFieldsSelected(Object.keys(responses) as AreaNames[])) {
-    //     setError("Please answer for all areas.");
-    //     return;
-    //   }
-    // } else 
     if (currentQuestion.id === "1c") {
       if (!validateYesNoResponses(Object.keys(responses) as AreaNames[])) {
         setError("Please select Yes or No for all areas.");
@@ -300,7 +294,6 @@ const SurveyPage = () => {
           <p className="text-red-600">
             {error}
           </p>}
-        //{/* {currentQuestion.id === "1" && renderYesNoRadios(activeAreas)} */}
         {currentQuestion.id === "1c" && renderYesNoRadios(activeAreas)}
         {currentQuestion.id === "1ci" && renderYesNoRadios(activeAreas)}
         {currentQuestion.id === "1cii" &&

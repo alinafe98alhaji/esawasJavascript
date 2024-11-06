@@ -294,7 +294,6 @@ const SurveyPage = () => {
           <p className="text-red-600">
             {error}
           </p>}
-        //{/* {currentQuestion.id === "1" && renderYesNoRadios(activeAreas)} */}
         {currentQuestion.id === "5a" && renderYesNoRadios(activeAreas)}
         {currentQuestion.id === "5ai" && renderYesNoRadios(activeAreas)}
         {currentQuestion.id === "5aii" &&
@@ -329,9 +328,7 @@ const SurveyPage = () => {
       className={`${isDarkMode ? "bg-gray-900" : "bg-gray-100"} min-h-screen`}
     >
       <div className="flex justify-between items-center p-4">
-        <h1 className="text-2xl font-bold text-blue-800">
-          Data Use Survey
-        </h1>
+        <h1 className="text-2xl font-bold text-blue-800">Data Use Survey</h1>
         <button
           onClick={toggleDarkMode}
           className={`p-2  rounded-full ${isDarkMode
