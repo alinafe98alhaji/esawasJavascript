@@ -56,31 +56,30 @@ const SurveyPage = () => {
   const [finalAreas1aiii, setFinalAreas1aiii] = useState<AreaNames[]>([]);
 
   const questions = [
-    { id: "1", text: "1.0: Does your organisation collect primary data?" },
     {
-      id: "1a",
+      id: "2a",
       text:
-        "1.a: Is your organisation aware of national guidelines that specify how data should be collected?"
+        "2.a: Is your organisation aware of centrally agreed upon principles for who owns the data in the sector?"
     },
     {
-      id: "1ai",
+      id: "2ai",
       text:
-        "1.a.(i): Does your organisation collect data in adherence to these national guidelines?"
+        "2.a.(i): Does your organisation follow these data ownership rules?"
     },
     {
-      id: "1aii",
+      id: "2aii",
       text:
-        "1.a.(ii): How effective are the guidelines in terms of their development, adoption, and suitability?"
+        "2.a.(ii): How effective are these data ownership principles at establishing clear and undisputed ownership of data?"
     },
     {
-      id: "1aiii",
+      id: "2aiii",
       text:
-        "1.a.(iii): Why are guidelines for data collection not fully effective in terms of their development, adoption, and suitability?"
+        "2.a.(iii): Why are data ownership principles not fully effective at establishing clear and undisputed ownership of data?"
     },
     {
-      id: "1aiv",
+      id: "2aiv",
       text:
-        "1.a.(iv): Why does your organisation not collect data in adherence to these guidelines?"
+        "2.a.(iv): Why does your organisation not adhere to these data ownership rules?"
     },
     {
       id: "submit",
@@ -158,26 +157,21 @@ const SurveyPage = () => {
   const handleNext = () => {
     const currentQuestion = questions[currentQuestionIndex];
 
-    if (currentQuestion.id === "1") {
-      if (!validateAllFieldsSelected(Object.keys(responses) as AreaNames[])) {
-        setError("Please answer for all areas.");
-        return;
-      }
-    } else if (currentQuestion.id === "1a") {
-      if (!validateYesNoResponses(activeAreas)) {
+    if (currentQuestion.id === "2a") {
+      if (!validateYesNoResponses(Object.keys(responses) as AreaNames[])) {
         setError("Please select Yes or No for all areas.");
         return;
       }
       const yesAreas = getYesAreas();
       setActiveAreas(yesAreas);
-    } else if (currentQuestion.id === "1ai") {
+    } else if (currentQuestion.id === "2ai") {
       if (!validateYesNoResponses(activeAreas)) {
         setError("Please select Yes or No for all areas.");
         return;
       }
       setYesAreas1ai(getYesAreas());
       setNoAreas1ai(getNoAreas());
-    } else if (currentQuestion.id === "1aii") {
+    } else if (currentQuestion.id === "2aii") {
       if (!validateFiveOptionResponses(yesAreas1ai)) {
         setError("Please select an option for all areas.");
         return;
@@ -185,13 +179,13 @@ const SurveyPage = () => {
       const areasFor1aiii = getOptions1to4();
       setFinalAreas1aiii(areasFor1aiii);
     } else if (
-      currentQuestion.id === "1aiii" &&
+      currentQuestion.id === "2aiii" &&
       !validateFiveOptionResponses(finalAreas1aiii)
     ) {
       setError("Please select an option for all areas.");
       return;
     } else if (
-      currentQuestion.id === "1aiv" &&
+      currentQuestion.id === "2aiv" &&
       !validateFiveOptionResponses(noAreas1ai)
     ) {
       setError("Please select an option for all areas.");
@@ -300,14 +294,14 @@ const SurveyPage = () => {
           <p className="text-red-600">
             {error}
           </p>}
-        {currentQuestion.id === "1" && renderYesNoRadios(activeAreas)}
-        {currentQuestion.id === "1a" && renderYesNoRadios(activeAreas)}
-        {currentQuestion.id === "1ai" && renderYesNoRadios(activeAreas)}
-        {currentQuestion.id === "1aii" &&
+        //{/* {currentQuestion.id === "1" && renderYesNoRadios(activeAreas)} */}
+        {currentQuestion.id === "2a" && renderYesNoRadios(activeAreas)}
+        {currentQuestion.id === "2ai" && renderYesNoRadios(activeAreas)}
+        {currentQuestion.id === "2aii" &&
           renderFiveOptionRadios(yesAreas1ai, optionsForQuestion1aii)}
-        {currentQuestion.id === "1aiii" &&
+        {currentQuestion.id === "2aiii" &&
           renderFiveOptionRadios(finalAreas1aiii, optionsForQuestion1aiii)}
-        {currentQuestion.id === "1aiv" &&
+        {currentQuestion.id === "2aiv" &&
           renderFiveOptionRadios(noAreas1ai, optionsForQuestion1aiii)}
         {currentQuestion.id === "submit" &&
           <div>
@@ -316,6 +310,15 @@ const SurveyPage = () => {
             </h3>{" "}
             {/* Adjusted text color */}
             <p className="text-blue-800">Your responses have been recorded.</p>
+            <div className="flex gap-30 items-bottom flex-col sm:flex-row justify-right">
+              <a
+                className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5"
+                href="/dataownershipandmanagement/question2b" // Link to your survey page
+                target="_self" // Change to _self if you want to navigate in the same tab
+              >
+                next Survey
+              </a>
+            </div>
           </div>}
       </div>
     );
@@ -327,7 +330,7 @@ const SurveyPage = () => {
     >
       <div className="flex justify-between items-center p-4">
         <h1 className="text-2xl font-bold text-blue-800">
-          Data collection Survey
+          Data Ownership and Management Survey
         </h1>
         <button
           onClick={toggleDarkMode}

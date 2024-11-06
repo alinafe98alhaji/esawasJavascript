@@ -56,31 +56,30 @@ const SurveyPage = () => {
   const [finalAreas1aiii, setFinalAreas1aiii] = useState<AreaNames[]>([]);
 
   const questions = [
-    { id: "1", text: "1.0: Does your organisation collect primary data?" },
     {
-      id: "1a",
+      id: "3a",
       text:
-        "1.a: Is your organisation aware of national guidelines that specify how data should be collected?"
+        "3.a: Is your organisation aware of clear rules and regular processes across the WSS sector for easy data sharing?"
     },
     {
-      id: "1ai",
+      id: "3ai",
       text:
-        "1.a.(i): Does your organisation collect data in adherence to these national guidelines?"
+        "3.a.(i): Does your organisation always comply with rules and processes to support data sharing?"
     },
     {
-      id: "1aii",
+      id: "3aii",
       text:
-        "1.a.(ii): How effective are the guidelines in terms of their development, adoption, and suitability?"
+        "3.a.(ii): How effective are sector standards and processes at facilitating sharing of data between different systems?"
     },
     {
-      id: "1aiii",
+      id: "3aiii",
       text:
-        "1.a.(iii): Why are guidelines for data collection not fully effective in terms of their development, adoption, and suitability?"
+        "3.a.(iii): Why are common data sharing standards and processes not always fully effective at facilitating seamless data sharing?"
     },
     {
-      id: "1aiv",
+      id: "3aiv",
       text:
-        "1.a.(iv): Why does your organisation not collect data in adherence to these guidelines?"
+        "3.a.(iv): Why does your organisation not always comply with common standards and processes for data sharing?"
     },
     {
       id: "submit",
@@ -128,9 +127,11 @@ const SurveyPage = () => {
 
   const saveResponsesToJSON = () => {
     const json = JSON.stringify(responses, null, 2);
+    //console.log(json); // Replace with save logic or API call as needed
     return json;
   };
 
+  // Custom validation functions for specific questions
   const validateYesNoResponses = (areas: AreaNames[]) => {
     return areas.every(area => typeof responses[area] === "boolean");
   };
@@ -148,29 +149,29 @@ const SurveyPage = () => {
     [compiledResponses]
   );
 
+  // const saveResponsesToJSON = () => {
+  //   const json = JSON.stringify(responses, null, 2);
+  //   return json;
+  // };
+
   const handleNext = () => {
     const currentQuestion = questions[currentQuestionIndex];
 
-    if (currentQuestion.id === "1") {
-      if (!validateAllFieldsSelected(Object.keys(responses) as AreaNames[])) {
-        setError("Please answer for all areas.");
-        return;
-      }
-    } else if (currentQuestion.id === "1a") {
-      if (!validateYesNoResponses(activeAreas)) {
+    if (currentQuestion.id === "3a") {
+      if (!validateYesNoResponses(Object.keys(responses) as AreaNames[])) {
         setError("Please select Yes or No for all areas.");
         return;
       }
       const yesAreas = getYesAreas();
       setActiveAreas(yesAreas);
-    } else if (currentQuestion.id === "1ai") {
+    } else if (currentQuestion.id === "3ai") {
       if (!validateYesNoResponses(activeAreas)) {
         setError("Please select Yes or No for all areas.");
         return;
       }
       setYesAreas1ai(getYesAreas());
       setNoAreas1ai(getNoAreas());
-    } else if (currentQuestion.id === "1aii") {
+    } else if (currentQuestion.id === "3aii") {
       if (!validateFiveOptionResponses(yesAreas1ai)) {
         setError("Please select an option for all areas.");
         return;
@@ -178,13 +179,13 @@ const SurveyPage = () => {
       const areasFor1aiii = getOptions1to4();
       setFinalAreas1aiii(areasFor1aiii);
     } else if (
-      currentQuestion.id === "1aiii" &&
+      currentQuestion.id === "3aiii" &&
       !validateFiveOptionResponses(finalAreas1aiii)
     ) {
       setError("Please select an option for all areas.");
       return;
     } else if (
-      currentQuestion.id === "1aiv" &&
+      currentQuestion.id === "3aiv" &&
       !validateFiveOptionResponses(noAreas1ai)
     ) {
       setError("Please select an option for all areas.");
@@ -192,6 +193,7 @@ const SurveyPage = () => {
     } else if (currentQuestion.id === "submit") {
       const finalResponses = saveResponsesToJSON();
       console.log(compiledResponses);
+      // Add your submit logic here
       alert("Responses submitted!");
       return;
     }
@@ -205,123 +207,145 @@ const SurveyPage = () => {
     setError(null);
   };
 
-  const renderYesNoRadios = (areas: AreaNames[]) =>
-    areas.map(area =>
-      <div
-        key={area}
-        className="flex flex-col sm:flex-row items-start sm:items-center justify-between p-4 mb-2 rounded-lg shadow bg-white hover:bg-blue-100 transition-colors duration-200"
-      >
-        <label className="text-blue-800 font-medium sm:w-1/3">
-          {areaFullNames[area]}
-        </label>
-        <div className="flex items-center space-x-6">
-          <div className="flex items-center">
-            <input
-              type="radio"
-              name={`yesno-${area}`}
-              value="yes"
-              checked={responses[area] === true}
-              onChange={() => handleYesNoChange(area, true)}
-              className="mr-1 text-green-500 border-gray-300 focus:ring-green-500"
-            />
-            <span className="text-green-600">Yes</span>
-          </div>
-          <div className="flex items-center">
-            <input
-              type="radio"
-              name={`yesno-${area}`}
-              value="no"
-              checked={responses[area] === false}
-              onChange={() => handleYesNoChange(area, false)}
-              className="mr-1 text-red-500 border-gray-300 focus:ring-red-500"
-            />
-            <span className="text-red-600">No</span>
-          </div>
-        </div>
-      </div>
-    );
-
-  const renderFiveOptionRadios = (areas: AreaNames[], options: string[]) =>
-    areas.map(area =>
-      <div
-        key={area}
-        className="mb-2 bg-white p-4 rounded-lg shadow hover:bg-blue-100 transition-colors duration-200"
-      >
-        <label className="block text-blue-800 font-medium mb-2">
-          {areaFullNames[area]}
-        </label>
-        {options.map((option, index) =>
-          <div key={index} className="flex items-center mb-2">
-            <input
-              type="radio"
-              name={`five-options-${area}`}
-              value={`${index + 1}`}
-              checked={responses[area] === `${index + 1}`}
-              onChange={() => handleFiveOptionChange(area, `${index + 1}`)}
-              className="mr-1 text-blue-500 border-gray-300 focus:ring-blue-500"
-            />
-            <span className="text-gray-700">
-              {option}
-            </span>
-          </div>
-        )}
-      </div>
-    );
-
-  const renderQuestion1aiii = () => {
-    return renderFiveOptionRadios(finalAreas1aiii, optionsForQuestion1aiii);
-  };
-
-  const renderQuestion1aiv = () => {
-    return renderFiveOptionRadios(noAreas1ai, optionsForQuestion1aiii);
-  };
+  // const handleBack = () => {
+  //   if (currentQuestionIndex > 0) {
+  //     setCurrentQuestionIndex(prevIndex => prevIndex - 1);
+  //     setError(null);
+  //   }
+  // };
 
   const renderQuestion = () => {
     const currentQuestion = questions[currentQuestionIndex];
 
-    switch (currentQuestion.id) {
-      case "1":
-        return renderYesNoRadios(activeAreas);
-      case "1a":
-        return renderYesNoRadios(activeAreas);
-      case "1ai":
-        return renderYesNoRadios(activeAreas);
-      case "1aii":
-        return renderFiveOptionRadios(yesAreas1ai, optionsForQuestion1aii);
-      case "1aiii":
-        return renderQuestion1aiii();
-      case "1aiv":
-        return renderQuestion1aiv();
-      case "submit":
-        return <div>Your responses have been submitted!</div>;
-      default:
-        return null;
-    }
+    const renderYesNoRadios = (areas: AreaNames[]) =>
+      areas.map(area =>
+        <div
+          key={area}
+          className="flex flex-col sm:flex-row items-start sm:items-center justify-between p-4 mb-2 rounded-lg shadow bg-white hover:bg-blue-100 transition-colors duration-200"
+        >
+          <label className="text-blue-800 font-medium sm:w-1/3">
+            {areaFullNames[area]}
+          </label>
+          <div className="flex items-center space-x-6">
+            <div className="flex items-center">
+              <input
+                type="radio"
+                name={`yesno-${area}`}
+                value="yes"
+                checked={responses[area] === true}
+                onChange={() => handleYesNoChange(area, true)}
+                className="mr-1 text-green-500 border-gray-300 focus:ring-green-500"
+              />
+              <span className="text-green-600">Yes</span>
+            </div>
+            <div className="flex items-center">
+              <input
+                type="radio"
+                name={`yesno-${area}`}
+                value="no"
+                checked={responses[area] === false}
+                onChange={() => handleYesNoChange(area, false)}
+                className="mr-1 text-red-500 border-gray-300 focus:ring-red-500"
+              />
+              <span className="text-red-600">No</span>
+            </div>
+          </div>
+        </div>
+      );
+
+    const renderFiveOptionRadios = (areas: AreaNames[], options: string[]) =>
+      areas.map(area =>
+        <div
+          key={area}
+          className="mb-2 bg-white p-4 rounded-lg shadow hover:bg-blue-100 transition-colors duration-200"
+        >
+          <label className="text-blue-800 font-medium">
+            {areaFullNames[area]}
+          </label>
+          <div className="flex flex-col">
+            {options.map((option, index) =>
+              <div key={index} className="flex items-center mb-1">
+                <input
+                  type="radio"
+                  name={`options-${area}`}
+                  value={`${index + 1}`}
+                  checked={responses[area] === `${index + 1}`}
+                  onChange={() => handleFiveOptionChange(area, `${index + 1}`)}
+                  className="mr-1 text-blue-600 border-gray-300 focus:ring-blue-500"
+                />
+                <span className="text-gray-800">{option}</span>{" "}
+                {/* Adjusted text color */}
+              </div>
+            )}
+          </div>
+        </div>
+      );
+
+    return (
+      <div className={`p-6 ${isDarkMode ? "bg-gray-900" : "bg-gray-100"}`}>
+        <h2
+          className={`text-lg font-semibold mb-4 ${isDarkMode
+            ? "text-white"
+            : "text-gray-800"}`}
+        >
+          {currentQuestion.text}
+        </h2>
+        {error &&
+          <p className="text-red-600">
+            {error}
+          </p>}
+        //{/* {currentQuestion.id === "1" && renderYesNoRadios(activeAreas)} */}
+        {currentQuestion.id === "3a" && renderYesNoRadios(activeAreas)}
+        {currentQuestion.id === "3ai" && renderYesNoRadios(activeAreas)}
+        {currentQuestion.id === "3aii" &&
+          renderFiveOptionRadios(yesAreas1ai, optionsForQuestion1aii)}
+        {currentQuestion.id === "3aiii" &&
+          renderFiveOptionRadios(finalAreas1aiii, optionsForQuestion1aiii)}
+        {currentQuestion.id === "3aiv" &&
+          renderFiveOptionRadios(noAreas1ai, optionsForQuestion1aiii)}
+        {currentQuestion.id === "submit" &&
+          <div>
+            <h3 className="mb-4 text-blue-800">
+              Thank you for completing the survey!
+            </h3>{" "}
+            {/* Adjusted text color */}
+            <p className="text-blue-800">Your responses have been recorded.</p>
+            <div className="flex gap-30 items-bottom flex-col sm:flex-row justify-right">
+              <a
+                className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5"
+                href="/dataopenessandflow/question3b" // Link to your survey page
+                target="_self" // Change to _self if you want to navigate in the same tab
+              >
+                next Survey
+              </a>
+            </div>
+          </div>}
+      </div>
+    );
   };
 
   return (
     <div
-      className={`min-h-screen ${isDarkMode
-        ? "bg-gray-800"
-        : "bg-gray-100"} p-6`}
+      className={`${isDarkMode ? "bg-gray-900" : "bg-gray-100"} min-h-screen`}
     >
-      <h1 className="text-2xl font-bold mb-4">Survey</h1>
-      {error &&
-        <div className="text-red-500 mb-4">
-          {error}
-        </div>}
+      <div className="flex justify-between items-center p-4">
+        <h1 className="text-2xl font-bold text-blue-800">
+          Data Openess and Flow Survey
+        </h1>
+        <button
+          onClick={toggleDarkMode}
+          className={`p-2  rounded-full ${isDarkMode
+            ? "bg-white text-black transition-transform transform hover:scale-105 hover:bg-blue-600"
+            : "bg-black text-white-800 transition-transform transform hover:scale-105 hover:bg-green-600"}`}
+        >
+          {isDarkMode ? "Light" : "Dark"}
+        </button>
+      </div>
       {renderQuestion()}
       <div className="flex justify-between p-4">
-        {currentQuestionIndex > 0 &&
-          <button
-            onClick={() => setCurrentQuestionIndex(prev => prev - 1)}
-            className="px-4 py-2 text-white bg-blue-500 rounded hover:bg-blue-600"
-          >
-            Back
-          </button>}
         <button
           onClick={handleNext}
-          className="px-4 py-2 text-white bg-green-500 rounded hover:bg-green-600"
+          className="px-4 py-2 bg-gray-500 text-white rounded transition-transform transform hover:scale-105 hover:bg-green-600"
         >
           {currentQuestionIndex === questions.length - 1 ? "Submit" : "Next"}
         </button>
