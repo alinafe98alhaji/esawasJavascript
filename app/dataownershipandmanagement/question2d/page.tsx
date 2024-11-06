@@ -33,18 +33,18 @@ const SurveyPage = () => {
   };
 
   const optionsForQuestion1aii = [
-    "1. Poorly defined and inconsistently used, causing fragmented data practices.",
-    "2. Some definition and use, but still uneven and not well-aligned with strategies.",
-    "3. Growing alignment with national strategies, increasing use, with some inconsistencies remaining.",
-    "4. Well-defined and widely used, aligned with national strategies, with minor discrepancies.",
-    "5. Fully developed, universally used, enabling seamless and consistent data practices across all organisations."
+    "1. Support is lacking, leading to frequent issues with data storage and backups.",
+    "2. Some support is provided, but it's not comprehensive, causing frequent issues.",
+    "3. Improved support is helping address some issues, but  inconsistencies remain.",
+    "4. Robust support ensures compliance with most standards, with only minor lapses.",
+    "5. Full support and resources ensure consistent and complete compliance with all data storage and backup standards."
   ];
 
   const optionsForQuestion1aiii = [
-    "Organisational Priorities: The standards aren't relevant to our organisation's goals",
-    "Complexity of Standards: The standards are too complex or technical for us.",
-    "Resource Constraints: We don't have enough money or staff to implement these standards.",
-    "Resistance to Change: People in the organisation resist changing current practices.",
+    "Resource Limitations: Insufficient budget or technology to meet the standards.",
+    "Technical Compatibility: Existing systems are incompatible with new standards.",
+    "Inadequate Training: Employees are not adequately trained on the new standards.",
+    "Organisational Priorities: Other strategic priorities take precedence over updating data storage practices.",
     "Others, please specify"
   ];
 

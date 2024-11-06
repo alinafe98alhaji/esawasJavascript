@@ -33,18 +33,18 @@ const SurveyPage = () => {
   };
 
   const optionsForQuestion1aii = [
-    "1. Poorly defined and inconsistently used, causing fragmented data practices.",
-    "2. Some definition and use, but still uneven and not well-aligned with strategies.",
-    "3. Growing alignment with national strategies, increasing use, with some inconsistencies remaining.",
-    "4. Well-defined and widely used, aligned with national strategies, with minor discrepancies.",
-    "5. Fully developed, universally used, enabling seamless and consistent data practices across all organisations."
+    "1. Incentives are ineffective, with no observable impact on promoting data-driven decision-making.",
+    "2. Some incentives exist, but their impact is limited and sporadic, leading to occasional data-driven decisions.",
+    "3. Incentives are better structured and more frequent, starting to influence decision-making more consistently, though not systematically across all areas.",
+    "4. Strong and well-implemented incentives are in place,  promoting data-driven decision-making in many parts of the organisation, with some areas still to improve.",
+    "5. Comprehensive and highly effective incentives are established, consistently and successfully encouraging data-driven decision-making throughout the organisation."
   ];
 
   const optionsForQuestion1aiii = [
-    "Organisational Priorities: The standards aren't relevant to our organisation's goals",
-    "Complexity of Standards: The standards are too complex or technical for us.",
-    "Resource Constraints: We don't have enough money or staff to implement these standards.",
-    "Resistance to Change: People in the organisation resist changing current practices.",
+    "Misalignment with Goals: Incentives don't align with the organisation's strategic goals.",
+    "Inadequate Value: The incentives offered are not substantial or attractive enough.",
+    "Cultural Mismatch: Organisational culture does not value or prioritise external incentives.",
+    "Limited Awareness: Lack of awareness about available incentives among relevant staff.",
     "Others, please specify"
   ];
 

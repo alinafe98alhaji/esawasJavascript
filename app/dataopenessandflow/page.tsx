@@ -33,18 +33,18 @@ const SurveyPage = () => {
   };
 
   const optionsForQuestion1aii = [
-    "1. Poorly defined and inconsistently used, causing fragmented data practices.",
-    "2. Some definition and use, but still uneven and not well-aligned with strategies.",
-    "3. Growing alignment with national strategies, increasing use, with some inconsistencies remaining.",
-    "4. Well-defined and widely used, aligned with national strategies, with minor discrepancies.",
-    "5. Fully developed, universally used, enabling seamless and consistent data practices across all organisations."
+    "1. Very Poor: Standards and processes are very ineffective, causing many data sharing problems.",
+    "2. Poor: Some standards and processes work, but many data sharing issues still occur.",
+    "3. Average: Standards and processes are improving, but there are still some data sharing issues.",
+    "4. Good: Standards and processes work well, with only a few data sharing problems.",
+    "5. Excellent: Standards and processes are very effective, ensuring smooth data sharing without problems."
   ];
 
   const optionsForQuestion1aiii = [
-    "Organisational Priorities: The standards aren't relevant to our organisation's goals",
-    "Complexity of Standards: The standards are too complex or technical for us.",
-    "Resource Constraints: We don't have enough money or staff to implement these standards.",
-    "Resistance to Change: People in the organisation resist changing current practices.",
+    "Complex Integration: Difficult to integrate with existing systems due to technical mismatches.",
+    "Resource Constraints: Lack of sufficient resources (time, budget, personnel) to implement and maintain these standards effectively.",
+    "Training Deficiencies: Insufficient training for staff on how to utilise these standards effectively.",
+    "Inadequate Collaboration: Poor collaboration between teams or departments in adopting and adapting these standards.",
     "Others, please specify"
   ];
 

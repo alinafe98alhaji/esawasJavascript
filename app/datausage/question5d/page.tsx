@@ -33,18 +33,18 @@ const SurveyPage = () => {
   };
 
   const optionsForQuestion1aii = [
-    "1. Poorly defined and inconsistently used, causing fragmented data practices.",
-    "2. Some definition and use, but still uneven and not well-aligned with strategies.",
-    "3. Growing alignment with national strategies, increasing use, with some inconsistencies remaining.",
-    "4. Well-defined and widely used, aligned with national strategies, with minor discrepancies.",
-    "5. Fully developed, universally used, enabling seamless and consistent data practices across all organisations."
+    "1. Capacity building/training programmes are totally ineffective, making it difficult to improve data literacy.",
+    "2. Basic programmes are in place but lack regularity or standardisation, resulting in inconsistent data literacy improvements across the organisation.",
+    "3. Programmes are more standardised and regular, improving data literacy, though they may not cover all data areas",
+    "4. Regular, standardised programmes are fully established and well integrated, though there are stillgaps in some areas.",
+    "5. Fully optimised, standardised, and centralised programmes comprehensively support data literacy improvements, driving continuous improvement across the organisation in all data areas."
   ];
 
   const optionsForQuestion1aiii = [
-    "Organisational Priorities: The standards aren't relevant to our organisation's goals",
-    "Complexity of Standards: The standards are too complex or technical for us.",
-    "Resource Constraints: We don't have enough money or staff to implement these standards.",
-    "Resistance to Change: People in the organisation resist changing current practices.",
+    "Lack of Relevance: Programmes do not address the specific data literacy needs of the organisation.",
+    "High Workload: Staff are too busy with regular duties to attend training.",
+    "Lack of Interest: Staff are not interested in participating in training programmes.",
+    "Financial Constraints: Organisation cannot afford the cost of training programmes.",
     "Others, please specify"
   ];
 

@@ -33,18 +33,18 @@ const SurveyPage = () => {
   };
 
   const optionsForQuestion1aii = [
-    "1. Poorly defined and inconsistently used, causing fragmented data practices.",
-    "2. Some definition and use, but still uneven and not well-aligned with strategies.",
-    "3. Growing alignment with national strategies, increasing use, with some inconsistencies remaining.",
-    "4. Well-defined and widely used, aligned with national strategies, with minor discrepancies.",
-    "5. Fully developed, universally used, enabling seamless and consistent data practices across all organisations."
+    "1. Centrally managed platforms are rudimentary, offering little to no support for decision-making.",
+    "2. Platforms exist but are limited in functionality, providing basic data insights that infrequently influence decisions.",
+    "3. Improvements in platform functionality are evident, offering more relevant data insights that occasionally aid decision-making.",
+    "4. Robust platforms provide comprehensive analytics and visualisations, regularly contributing to informed decision-making, though minor gaps in data relevance or timeliness may persist.",
+    "5. State-of-the-art platforms deliver timely, accurate, and actionable insights that consistently drive strategic decisions across the organisation."
   ];
 
   const optionsForQuestion1aiii = [
-    "Organisational Priorities: The standards aren't relevant to our organisation's goals",
-    "Complexity of Standards: The standards are too complex or technical for us.",
-    "Resource Constraints: We don't have enough money or staff to implement these standards.",
-    "Resistance to Change: People in the organisation resist changing current practices.",
+    "Complex Interface: Platforms are difficult to use due to complicated interfaces.",
+    "Inadequate Training: Insufficient training on how to effectively use the platforms.",
+    "Poor Data Integration: Difficulty in integrating diverse data sources effectively.",
+    "Cultural Resistance: Organisational resistance to relying on centralised tools for decision-making.",
     "Others, please specify"
   ];
 

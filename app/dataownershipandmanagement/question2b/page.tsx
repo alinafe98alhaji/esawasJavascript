@@ -33,18 +33,18 @@ const SurveyPage = () => {
   };
 
   const optionsForQuestion1aii = [
-    "1. Poorly defined and inconsistently used, causing fragmented data practices.",
-    "2. Some definition and use, but still uneven and not well-aligned with strategies.",
-    "3. Growing alignment with national strategies, increasing use, with some inconsistencies remaining.",
-    "4. Well-defined and widely used, aligned with national strategies, with minor discrepancies.",
-    "5. Fully developed, universally used, enabling seamless and consistent data practices across all organisations."
+    "1. The process has not significantly improved understanding of data needs.",
+    "2. The process has led to a basic awareness of some data needs.",
+    "3. The process is improving understanding, but comprehensive insight is lacking.",
+    "4. The process has substantially enhanced understanding of most data needs.",
+    "5. The process has completely clarified all aspects of the organisation's data needs."
   ];
 
   const optionsForQuestion1aiii = [
-    "Organisational Priorities: The standards aren't relevant to our organisation's goals",
-    "Complexity of Standards: The standards are too complex or technical for us.",
-    "Resource Constraints: We don't have enough money or staff to implement these standards.",
-    "Resistance to Change: People in the organisation resist changing current practices.",
+    "Infrequent Meetings: Meetings are too infrequent to capture evolving data needs.",
+    "Incomplete Representation: Not all key stakeholders are involved.",
+    "Superficial Discussions: Discussions do not deeply address specific data needs.",
+    "Inefficient Processes: The structure of the meetings does not support productive dialogue.",
     "Others, please specify"
   ];
 

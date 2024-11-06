@@ -33,18 +33,18 @@ const SurveyPage = () => {
   };
 
   const optionsForQuestion1aii = [
-    "1. Poorly defined and inconsistently used, causing fragmented data practices.",
-    "2. Some definition and use, but still uneven and not well-aligned with strategies.",
-    "3. Growing alignment with national strategies, increasing use, with some inconsistencies remaining.",
-    "4. Well-defined and widely used, aligned with national strategies, with minor discrepancies.",
-    "5. Fully developed, universally used, enabling seamless and consistent data practices across all organisations."
+    "1. The existing plan is completely inadequate, missing basic sustainability needs.",
+    "2. The plan addresses some short-term needs but lacks future-focused sustainability.",
+    "3. The plan considers sustainability but is not fully comprehensive and has long-term gaps.",
+    "4. A comprehensive plan is in place but not fully optimised, with some sustainability gaps remaining.",
+    "5. A fully optimised plan ensures complete and long-term sustainability of data collection."
   ];
 
   const optionsForQuestion1aiii = [
-    "Organisational Priorities: The standards aren't relevant to our organisation's goals",
-    "Complexity of Standards: The standards are too complex or technical for us.",
-    "Resource Constraints: We don't have enough money or staff to implement these standards.",
-    "Resistance to Change: People in the organisation resist changing current practices.",
+    "Misaligned Priorities: The strategy doesn't match our long-term goals and priorities.",
+    "Insufficient Funding: There isn't enough sustained funding to support ongoing data collection.",
+    "Lack of Incentives: There are not enough incentives for organisations to keep investing in data collection improvements.",
+    "Technological Gaps: The strategy doesn't adequately address the need for up-to-date technology and infrastructure.",
     "Others, please specify"
   ];
 
@@ -64,7 +64,7 @@ const SurveyPage = () => {
     {
       id: "1ci",
       text:
-        "1.c.(i): Has sustainable resource for your organisation’s ongoing data collection efforts been ensured at the national level?"
+        "1.c.(i): Has sustainable resource for your organisation's ongoing data collection efforts been ensured at the national level?"
     },
     {
       id: "1cii",

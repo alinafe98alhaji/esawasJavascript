@@ -33,18 +33,18 @@ const SurveyPage = () => {
   };
 
   const optionsForQuestion1aii = [
-    "1. Poorly defined and inconsistently used, causing fragmented data practices.",
-    "2. Some definition and use, but still uneven and not well-aligned with strategies.",
-    "3. Growing alignment with national strategies, increasing use, with some inconsistencies remaining.",
-    "4. Well-defined and widely used, aligned with national strategies, with minor discrepancies.",
-    "5. Fully developed, universally used, enabling seamless and consistent data practices across all organisations."
+    "1. Centrally coordinated effort are inneffective, resulting in consistently poor data quality.",
+    "2. Initial centrally coordinated efforts are present but are sporadic and partially effective, leading to minor improvements in data quality.",
+    "3. Coordination is improving, with more systematic approaches being developed, yet full implementation and consistency are lacking.",
+    "4. Well-coordinated and consistent programs are in place, significantly enhancing data quality, although occasional issues still arise.",
+    "5. Fully optimised, comprehensive, and consistently executed programs ensure excellent data quality across the organisation without significant issues."
   ];
 
   const optionsForQuestion1aiii = [
-    "Organisational Priorities: The standards aren't relevant to our organisation's goals",
-    "Complexity of Standards: The standards are too complex or technical for us.",
-    "Resource Constraints: We don't have enough money or staff to implement these standards.",
-    "Resistance to Change: People in the organisation resist changing current practices.",
+    "Lack of Customisation: Programs are too generic and do not cater to the specific challenges or requirements of different departments.",
+    "Poor Engagement: Lack of engagement or buy-in from key stakeholders, leading to low participation.",
+    "Inconsistent Implementation: Programs are not consistently implemented across all areas of the organisation.",
+    "Cultural Barriers: The organisational culture does not fully support continuous improvement in data quality.",
     "Others, please specify"
   ];
 

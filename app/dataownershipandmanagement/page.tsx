@@ -33,18 +33,18 @@ const SurveyPage = () => {
   };
 
   const optionsForQuestion1aii = [
-    "1. Poorly defined and inconsistently used, causing fragmented data practices.",
-    "2. Some definition and use, but still uneven and not well-aligned with strategies.",
-    "3. Growing alignment with national strategies, increasing use, with some inconsistencies remaining.",
-    "4. Well-defined and widely used, aligned with national strategies, with minor discrepancies.",
-    "5. Fully developed, universally used, enabling seamless and consistent data practices across all organisations."
+    "1. No clear data ownership principles, leading to frequent disagreements.",
+    "2. Basic principles outlined, but not comprehensive, causing some confusion.",
+    "3. Better definition and communication of ownership principles, with some enforcement issues.",
+    "4. Strong principles recognised by most, with occasional minor disagreements.",
+    "5. Fully established and respected principles, effectively eliminating any disagreements."
   ];
 
   const optionsForQuestion1aiii = [
-    "Organisational Priorities: The standards aren't relevant to our organisation's goals",
-    "Complexity of Standards: The standards are too complex or technical for us.",
-    "Resource Constraints: We don't have enough money or staff to implement these standards.",
-    "Resistance to Change: People in the organisation resist changing current practices.",
+    "Ambiguous Language: The principles use vague or ambiguous language that leads to interpretation conflicts.",
+    "Inadequate Legal Support: There is insufficient legal backing to enforce these principles effectively.",
+    "Resistance from Stakeholders: Some stakeholders resist adopting these principles due to conflicting interests.",
+    "Insufficient Awareness and Training: Stakeholders are not adequately informed or trained on the importance and application of these principles.",
     "Others, please specify"
   ];
 

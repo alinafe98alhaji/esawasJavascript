@@ -33,18 +33,18 @@ const SurveyPage = () => {
   };
 
   const optionsForQuestion1aii = [
-    "1. Poorly defined and inconsistently used, causing fragmented data practices.",
-    "2. Some definition and use, but still uneven and not well-aligned with strategies.",
-    "3. Growing alignment with national strategies, increasing use, with some inconsistencies remaining.",
-    "4. Well-defined and widely used, aligned with national strategies, with minor discrepancies.",
-    "5. Fully developed, universally used, enabling seamless and consistent data practices across all organisations."
+    "1. Centralised tools are insufficient, lacking critical features and integration with systems, leading to inefficient data collection.",
+    "2. Centrally developed tools have basic digital features but don't fully cover all organisational needs or integrate smoothly with other systems.",
+    "3. Digital tools are improving and starting to meet our broader needs, though integration with existing systems is not yet seamless.",
+    "4. The tools are well-suited for most tasks and show good integration, but there's room for better customisation and user experience improvements.",
+    "5. Tools are fully optimised, covering all specific needs of our organisation, and integrate flawlessly with our systems, enhancing overall productivity and data quality."
   ];
 
   const optionsForQuestion1aiii = [
-    "Organisational Priorities: The standards aren't relevant to our organisation's goals",
-    "Complexity of Standards: The standards are too complex or technical for us.",
-    "Resource Constraints: We don't have enough money or staff to implement these standards.",
-    "Resistance to Change: People in the organisation resist changing current practices.",
+    "Limited Customisation: The tools don't offer enough customisation options to meet our specific data collection needs.",
+    "Complexity of Use: The tools are too complex or not user-friendly, making them difficult to use effectively.",
+    "Incompatibility with Existing Systems: The tools don't integrate well with our existing data management systems.",
+    "Insufficient Training: There isn't enough training provided to effectively use these tools.",
     "Others, please specify"
   ];
 

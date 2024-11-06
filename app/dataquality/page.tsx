@@ -33,18 +33,18 @@ const SurveyPage = () => {
   };
 
   const optionsForQuestion1aii = [
-    "1. Poorly defined and inconsistently used, causing fragmented data practices.",
-    "2. Some definition and use, but still uneven and not well-aligned with strategies.",
-    "3. Growing alignment with national strategies, increasing use, with some inconsistencies remaining.",
-    "4. Well-defined and widely used, aligned with national strategies, with minor discrepancies.",
-    "5. Fully developed, universally used, enabling seamless and consistent data practices across all organisations."
+    "1. Centralised data quality processes are ineffective, leading to poor data quality.",
+    "2. Basic processes are established but lack thoroughness and consistency, resulting in only slight improvements in data quality.",
+    "3. Processes are improving, becoming more regular and systematic, but still face challenges in full implementation and coverage.",
+    "4. Strong, well-integrated processes are in place, significantly improving data quality, though minor gaps in coverage or timeliness may exist",
+    "5. Fully optimised and comprehensive centralised processes ensure top-quality data consistently, with no significant gaps."
   ];
 
   const optionsForQuestion1aiii = [
-    "Organisational Priorities: The standards aren't relevant to our organisation's goals",
-    "Complexity of Standards: The standards are too complex or technical for us.",
-    "Resource Constraints: We don't have enough money or staff to implement these standards.",
-    "Resistance to Change: People in the organisation resist changing current practices.",
+    "Cultural Barriers: Organisational culture does not prioritise data quality.",
+    "Complex Procedures: Procedures are overly complicated, hindering their implementation.",
+    "Limited Scope: Processes do not cover all data types or sources used by the organisation.",
+    "Resource Constraints: Insufficient resources (staff, technology, funding) to execute the processes effectively.",
     "Others, please specify"
   ];
 

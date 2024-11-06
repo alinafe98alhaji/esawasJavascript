@@ -33,18 +33,18 @@ const SurveyPage = () => {
   };
 
   const optionsForQuestion1aii = [
-    "1. Poorly defined and inconsistently used, causing fragmented data practices.",
-    "2. Some definition and use, but still uneven and not well-aligned with strategies.",
-    "3. Growing alignment with national strategies, increasing use, with some inconsistencies remaining.",
-    "4. Well-defined and widely used, aligned with national strategies, with minor discrepancies.",
-    "5. Fully developed, universally used, enabling seamless and consistent data practices across all organisations."
+    "1. Centralised KPIs are totally ineffecitve, making it difficult to monitor performance effectively.",
+    "2. Basic KPIs are in place but lack standardisation, resulting in inconsistent performance monitoring across the organisation.",
+    "3. KPIs are more standardised and centralised, improving performance monitoring, though integration across all departments is incomplete.",
+    "4. Well-defined, standardised KPIs are fully established and mostly integrated, providing reliable performance monitoring, with minor gaps in some areas.",
+    "5. Fully optimised, standardised, and centralised KPIs comprehensively support performance monitoring, driving continuous improvement across the organisation."
   ];
 
   const optionsForQuestion1aiii = [
-    "Organisational Priorities: The standards aren't relevant to our organisation's goals",
-    "Complexity of Standards: The standards are too complex or technical for us.",
-    "Resource Constraints: We don't have enough money or staff to implement these standards.",
-    "Resistance to Change: People in the organisation resist changing current practices.",
+    "Lack of Relevance: KPIs do not match the specific performance metrics relevant to the organisation.",
+    "Rigid Structure: KPIs are too rigid, offering no flexibility to adapt to organisational changes.",
+    "Cultural Dissonance: The organisation's culture does not support reliance on standardised external metrics.",
+    "Implementation Challenges: Challenges in implementing and consistently using these KPIs across the organisation.",
     "Others, please specify"
   ];
 

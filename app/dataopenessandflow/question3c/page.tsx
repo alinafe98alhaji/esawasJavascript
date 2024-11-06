@@ -33,18 +33,18 @@ const SurveyPage = () => {
   };
 
   const optionsForQuestion1aii = [
-    "1. Poorly defined and inconsistently used, causing fragmented data practices.",
-    "2. Some definition and use, but still uneven and not well-aligned with strategies.",
-    "3. Growing alignment with national strategies, increasing use, with some inconsistencies remaining.",
-    "4. Well-defined and widely used, aligned with national strategies, with minor discrepancies.",
-    "5. Fully developed, universally used, enabling seamless and consistent data practices across all organisations."
+    "1. Open data is not a priority, resulting in negligible external engagement.",
+    "2. Policies exist but lack consistency, leading to limited engagement.",
+    "3. Clearer, more consistent policies increase engagement, though some accessibility issues remain.",
+    "4. Well-established policies enhance accessibility, achieving high engagement with occasional support gaps.",
+    "5. Optimised policies maximise accessibility and engagement, continuously supported by updates and community interaction."
   ];
 
   const optionsForQuestion1aiii = [
-    "Organisational Priorities: The standards aren't relevant to our organisation's goals",
-    "Complexity of Standards: The standards are too complex or technical for us.",
-    "Resource Constraints: We don't have enough money or staff to implement these standards.",
-    "Resistance to Change: People in the organisation resist changing current practices.",
+    "Limited Relevance: Open data is not important or relevant to us",
+    "Cultural Resistance: Internal resistance to data sharing and transparency.",
+    "Regulatory Constraints: Compliance issues limit open data sharing.",
+    "Lack of External Demand: Minimal external interest in our open data.",
     "Others, please specify"
   ];
 

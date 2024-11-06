@@ -33,18 +33,18 @@ const SurveyPage = () => {
   };
 
   const optionsForQuestion1aii = [
-    "1. Poorly defined and inconsistently used, causing fragmented data practices.",
-    "2. Some definition and use, but still uneven and not well-aligned with strategies.",
-    "3. Growing alignment with national strategies, increasing use, with some inconsistencies remaining.",
-    "4. Well-defined and widely used, aligned with national strategies, with minor discrepancies.",
-    "5. Fully developed, universally used, enabling seamless and consistent data practices across all organisations."
+    "1. The process is ineffective, leading to significant gaps in data collection coverage.",
+    "2. Initial processes are in place but are inconsistently applied, resulting in uneven data collection.",
+    "3. Processes are improving, becoming more standard and slightly more inclusive, but data collection is still not universal.",
+    "4. Well-implemented processes ensure broad coverage, with only some small oversights.",
+    "5. The process is fully optimised and ensures complete, universal data collection."
   ];
 
   const optionsForQuestion1aiii = [
-    "Organisational Priorities: The standards aren't relevant to our organisation's goals",
-    "Complexity of Standards: The standards are too complex or technical for us.",
-    "Resource Constraints: We don't have enough money or staff to implement these standards.",
-    "Resistance to Change: People in the organisation resist changing current practices.",
+    "Complex Compliance: The requirements are too complex or demanding to follow practically.",
+    "Resource Constraints: We don't have enough resources (money, staff, technology) for effective data collection.",
+    "Cultural Barriers: Organisational or regional cultures resist changes required by national rules.",
+    "Inadequate Training: Lack of proper training for those collecting data limits effectiveness.",
     "Others, please specify"
   ];
 

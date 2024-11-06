@@ -33,19 +33,19 @@ const SurveyPage = () => {
   };
 
   const optionsForQuestion1aii = [
-    "1. Poorly defined and inconsistently used, causing fragmented data practices.",
-    "2. Some definition and use, but still uneven and not well-aligned with strategies.",
-    "3. Growing alignment with national strategies, increasing use, with some inconsistencies remaining.",
-    "4. Well-defined and widely used, aligned with national strategies, with minor discrepancies.",
-    "5. Fully developed, universally used, enabling seamless and consistent data practices across all organisations."
+    "1.  Data protection rules are largely irrelevant to current operations, with no real impact or necessity observed.",
+    "2. Data protection rules have some relevance, but are not normally feasible or reasonable to comply with",
+    "3. Data protection rules are relevant to a broader range of activities, but are often too hard to follow",
+    "4. Data protection rules are highly relevant, significantly influencing organisational processes, but are not always possible to comply with",
+    "5.  Data protection rules are crucial across all aspects of the organisation, fundamentally integral to its operations, compliance, and strategic objectives."
   ];
 
   const optionsForQuestion1aiii = [
-    "Organisational Priorities: The standards aren't relevant to our organisation's goals",
-    "Complexity of Standards: The standards are too complex or technical for us.",
-    "Resource Constraints: We don't have enough money or staff to implement these standards.",
-    "Resistance to Change: People in the organisation resist changing current practices.",
-    "Others, please specify"
+    "Lack of Training: Staff aren't properly trained on data protection.",
+    "Complex Regulations: Data protection rules are too complex and hard to understand.",
+    "Outdated Systems: Our data systems are old and can't meet current standards.",
+    "Poor Awareness: There's a general lack of awareness about data protection in the organisation.",
+    "Other(please specify)"
   ];
 
   const [yesAreas1ai, setYesAreas1ai] = useState<AreaNames[]>([]);

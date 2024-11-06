@@ -33,18 +33,18 @@ const SurveyPage = () => {
   };
 
   const optionsForQuestion1aii = [
-    "1. Poorly defined and inconsistently used, causing fragmented data practices.",
-    "2. Some definition and use, but still uneven and not well-aligned with strategies.",
-    "3. Growing alignment with national strategies, increasing use, with some inconsistencies remaining.",
-    "4. Well-defined and widely used, aligned with national strategies, with minor discrepancies.",
-    "5. Fully developed, universally used, enabling seamless and consistent data practices across all organisations."
+    "1. Centralised platforms don't connect different data sources well, causing major problems in data sharing.",
+    "2. Some integration features exist, but systems often have compatibility issues and support limited data formats, leading to occasional disruptions.",
+    "3. Systems are improving, with better integration and support for common data formats, but still lack robustness and speed.",
+    "4. Systems are well-integrated, supporting many data formats and ensuring reliable data transfer with minimal delays or errors.",
+    "5. Centralised systems are top-notch, connecting all data sources seamlessly with high reliability, speed, and no compatibility issues, ensuring optimal data sharing."
   ];
 
   const optionsForQuestion1aiii = [
-    "Organisational Priorities: The standards aren't relevant to our organisation's goals",
-    "Complexity of Standards: The standards are too complex or technical for us.",
-    "Resource Constraints: We don't have enough money or staff to implement these standards.",
-    "Resistance to Change: People in the organisation resist changing current practices.",
+    "Incompatibility Issues: Systems are not compatible with existing data formats or software used by different departments.",
+    "Complex User Interface: The user interface is too complex, making it difficult for  users to operate efficiently.",
+    "Frequent Downtime: Systems experience frequent downtimes or maintenance issues, interrupting data sharing.",
+    "Inadequate Training: Staff lack adequate training to use the systems effectively, leading to underutilisation.",
     "Others, please specify"
   ];
 
