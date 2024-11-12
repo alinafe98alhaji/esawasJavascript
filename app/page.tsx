@@ -100,7 +100,7 @@ export default function Home() {
   return (
     <div className="relative min-h-screen p-6 bg-gradient-to-b from-teal-200 via-blue-200 to-blue-300 text-teal-900 flex flex-col items-center">
       {/* Logo positioned at top-center */}
-      <div className="relative w-[120px] h-[80px] top-4 flex justify-center w-full">
+      <div className="relative w-[120px] h-[120px] top-4 flex justify-center w-full">
         <Image
           src="/images/logo.svg" // Replace with your logo path
           alt="ESAWAS logo"
