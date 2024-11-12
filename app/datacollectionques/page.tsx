@@ -315,7 +315,11 @@ const SurveyPage = () => {
       );
 
     return (
-      <div className={`p-6 ${isDarkMode ? "bg-gray-900" : "bg-gray-100"}`}>
+      <div
+        className={`p-6 rounded-lg ${isDarkMode
+          ? "bg-gray-900"
+          : "bg-gray-100"}`}
+      >
         <h2
           className={`text-lg font-semibold mb-4 ${isDarkMode
             ? "text-white"
@@ -359,7 +363,9 @@ const SurveyPage = () => {
 
   return (
     <div
-      className={`${isDarkMode ? "bg-gray-900" : "bg-gray-100"} min-h-screen`}
+      className={`${isDarkMode
+        ? "relative p-6 bg-gray-900 "
+        : "relative p-6  bg-gradient-to-b from-teal-200 via-blue-200 to-blue-300"} min-h-screen`}
     >
       <div className="flex justify-between items-center p-4">
         <h1 className="text-2xl font-bold text-blue-800">
