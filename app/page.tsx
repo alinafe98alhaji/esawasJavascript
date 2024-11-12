@@ -100,25 +100,23 @@ export default function Home() {
   return (
     <div className="relative min-h-screen p-6 bg-gradient-to-b from-teal-200 via-blue-200 to-blue-300 text-teal-900 flex flex-col items-center">
       {/* Logo positioned at top-center */}
-      <div className="absolute top-4 flex justify-center w-full">
-        <div className="relative w-[120px] h-[80px] overflow-hidden rounded-lg shadow-lg transition-transform transform hover:scale-110 duration-300">
-          <Image
-            src="/images/download.png" // Replace with your logo path
-            alt="ESAWAS logo"
-            layout="responsive"
-            width={120}
-            height={60}
-            priority
-            className="object-contain rounded-md"
-          />
-        </div>
+      <div className="relative w-[120px] h-[80px] top-4 flex justify-center w-full">
+        <Image
+          src="/images/logo.svg" // Replace with your logo path
+          alt="ESAWAS logo"
+          layout="responsive"
+          width={0}
+          height={0}
+          priority
+        />
       </div>
 
       {/* Main Content */}
       <main className="flex flex-col gap-4 items-center mt-24 sm:items-start text-center sm:text-left bg-white bg-opacity-95 p-8 rounded-2xl shadow-2xl max-w-2xl w-full transition-transform transform hover:scale-[1.01] duration-300">
         {/* Main Heading */}
         <h1 className="text-3xl sm:text-4xl font-extrabold tracking-tight text-blue-700 drop-shadow-md leading-tight">
-          Welcome to the ESAWAS Data Maturity Assessment Tool
+          Welcome to the ESAWAS Organisational Level Data Maturity Assessment
+          Tool
         </h1>
 
         {/* Subheading */}
