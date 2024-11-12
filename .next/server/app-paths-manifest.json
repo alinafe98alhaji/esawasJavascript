@@ -1,4 +1,8 @@
 {
   "/datacollectionques/question1c/page": "app/datacollectionques/question1c/page.js",
-  "/favicon.ico/route": "app/favicon.ico/route.js"
+  "/datacollectionques/question1d/page": "app/datacollectionques/question1d/page.js",
+  "/dataownershipandmanagement/page": "app/dataownershipandmanagement/page.js",
+  "/dataownershipandmanagement/question2b/page": "app/dataownershipandmanagement/question2b/page.js",
+  "/dataownershipandmanagement/question2c/page": "app/dataownershipandmanagement/question2c/page.js",
+  "/dataownershipandmanagement/question2d/page": "app/dataownershipandmanagement/question2d/page.js"
 }

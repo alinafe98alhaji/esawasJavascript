@@ -1,15 +1,55 @@
 {
   "pages": {
-    "/datacollectionques/question1c/page": [
+    "/datacollectionques/question1b/page": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
-      "static/chunks/app/datacollectionques/question1c/page.js"
+      "static/chunks/app/datacollectionques/question1b/page.js"
     ],
     "/layout": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
       "static/css/app/layout.css",
       "static/chunks/app/layout.js"
+    ],
+    "/page": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/chunks/app/page.js"
+    ],
+    "/datacollectionques/page": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/chunks/app/datacollectionques/page.js"
+    ],
+    "/datacollectionques/question1c/page": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/chunks/app/datacollectionques/question1c/page.js"
+    ],
+    "/datacollectionques/question1d/page": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/chunks/app/datacollectionques/question1d/page.js"
+    ],
+    "/dataownershipandmanagement/page": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/chunks/app/dataownershipandmanagement/page.js"
+    ],
+    "/dataownershipandmanagement/question2b/page": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/chunks/app/dataownershipandmanagement/question2b/page.js"
+    ],
+    "/dataownershipandmanagement/question2c/page": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/chunks/app/dataownershipandmanagement/question2c/page.js"
+    ],
+    "/dataownershipandmanagement/question2d/page": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/chunks/app/dataownershipandmanagement/question2d/page.js"
     ]
   }
 }
