@@ -315,7 +315,11 @@ const SurveyPage = () => {
       );
 
     return (
-      <div className={`p-6 ${isDarkMode ? "bg-gray-900" : "bg-gray-100"}`}>
+      <div
+        className={`p-6 rounded-lg ${isDarkMode
+          ? "bg-gray-900"
+          : "bg-gray-100"}`}
+      >
         <h2
           className={`text-lg font-semibold mb-4 ${isDarkMode
             ? "text-white"
@@ -364,7 +368,7 @@ const SurveyPage = () => {
     >
       <div className="flex justify-between items-center p-4">
         <h1 className="text-2xl font-bold text-blue-800">
-          Data Openess and Flow Survey
+          Data Openess and Flow Assessment
         </h1>
         <button
           onClick={toggleDarkMode}

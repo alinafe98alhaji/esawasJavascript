@@ -1,7 +1,7 @@
 {
+  "/datacollectionques/question1d/page": "app/datacollectionques/question1d/page.js",
+  "/dataownershipandmanagement/page": "app/dataownershipandmanagement/page.js",
+  "/dataownershipandmanagement/question2b/page": "app/dataownershipandmanagement/question2b/page.js",
   "/dataownershipandmanagement/question2c/page": "app/dataownershipandmanagement/question2c/page.js",
-  "/dataownershipandmanagement/question2d/page": "app/dataownershipandmanagement/question2d/page.js",
-  "/page": "app/page.js",
-  "/datacollectionques/page": "app/datacollectionques/page.js",
-  "/datacollectionques/question1b/page": "app/datacollectionques/question1b/page.js"
+  "/dataownershipandmanagement/question2d/page": "app/dataownershipandmanagement/question2d/page.js"
 }

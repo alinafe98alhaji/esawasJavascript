@@ -369,7 +369,7 @@ const SurveyPage = () => {
     >
       <div className="flex justify-between items-center p-4">
         <h1 className="text-2xl font-bold text-blue-800">
-          Data collection Survey
+          Data Collection Assessment
         </h1>
         <button
           onClick={toggleDarkMode}
