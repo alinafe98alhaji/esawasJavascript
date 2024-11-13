@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import Image from "next/image";
 
 const SurveyPage = () => {
   const [isDarkMode, setIsDarkMode] = useState(false);

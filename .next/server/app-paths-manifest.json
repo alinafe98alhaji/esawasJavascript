@@ -1,7 +1,3 @@
 {
-  "/dataownershipandmanagement/question2b/page": "app/dataownershipandmanagement/question2b/page.js",
-  "/dataownershipandmanagement/question2d/page": "app/dataownershipandmanagement/question2d/page.js",
-  "/page": "app/page.js",
-  "/datacollectionques/page": "app/datacollectionques/page.js",
-  "/dataownershipandmanagement/question2c/page": "app/dataownershipandmanagement/question2c/page.js"
+  "/page": "app/page.js"
 }
