@@ -135,13 +135,13 @@ export default function Home() {
         {/* Call to Action Buttons */}
         <div className="flex gap-4 items-center flex-col sm:flex-row">
           <a
-            className="bg-gradient-to-r from-teal-500 to-blue-500 text-white rounded-full py-2 px-6 font-semibold text-lg transition-transform transform hover:scale-105 shadow-xl hover:shadow-2xl"
+            className="bg-gradient-to-r from-teal-500 to-blue-500 text-white rounded-full py-2 px-6 font-semibold text-md transition-transform transform hover:scale-105 shadow-xl hover:shadow-2xl"
             href="/datacollectionques"
           >
             Start Assessment
           </a>
           <a
-            className="bg-gray-50 border border-gray-300 text-gray-800 rounded-full py-2 px-6 font-semibold text-lg transition-transform transform hover:scale-105 shadow-lg hover:bg-gray-100"
+            className="bg-gray-50 border border-gray-300 text-gray-800 rounded-full py-2 px-6 font-semibold text-md transition-transform transform hover:scale-105 shadow-lg hover:bg-gray-100 hover:shadow-2xl"
             href="/documentation"
             target="_blank"
             rel="noopener noreferrer"
