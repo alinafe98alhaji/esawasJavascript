@@ -321,7 +321,7 @@ const SurveyPage = () => {
           : "bg-gray-100"}`}
       >
         <h2
-          className={`text-lg font-semibold mb-4 ${isDarkMode
+          className={`text-lg font-[Lato] mb-4 ${isDarkMode
             ? "text-white"
             : "text-gray-800"}`}
         >
@@ -363,30 +363,49 @@ const SurveyPage = () => {
   return (
     <div
       className={`${isDarkMode
-        ? "relative p-6 bg-gray-900 "
-        : "relative p-6  bg-gradient-to-b from-teal-200 via-blue-200 to-blue-300"} min-h-screen`}
+        ? "relative p-6 bg-gray-900"
+        : "relative p-6 bg-gradient-to-b from-teal-500 via-blue-300 to-blue-500"} justify-between items-center min-h-screen`}
+      style={{
+        position: "relative"
+      }}
     >
-      <div className="flex justify-between items-center p-4">
-        <h1 className="text-2xl font-bold text-blue-800">
-          Data Collection Assessment
-        </h1>
-        <button
-          onClick={toggleDarkMode}
-          className={`p-2  rounded-full ${isDarkMode
-            ? "bg-white text-black transition-transform transform hover:scale-105 hover:bg-blue-600"
-            : "bg-black text-white-800 transition-transform transform hover:scale-105 hover:bg-green-600"}`}
-        >
-          {isDarkMode ? "Light" : "Dark"}
-        </button>
-      </div>
-      {renderQuestion()}
-      <div className="flex justify-between p-4">
-        <button
-          onClick={handleNext}
-          className="bg-gradient-to-r from-teal-500 to-blue-500 text-white rounded-full py-3 px-8 font-semibold text-lg transition-transform transform hover:scale-105 shadow-xl hover:shadow-2xl"
-        >
-          {currentQuestionIndex === questions.length - 1 ? "Submit" : "Next"}
-        </button>
+      {/* Background Image as Watermark */}
+      <div
+        className="absolute inset-0 bg-center bg-no-repeat bg-contain opacity-80 pointer-events-none z-0"
+        style={{
+          backgroundImage: `url('/images/afriq.png')`, // Replace with your image path
+          backgroundSize: "contain"
+        }}
+      />
+
+      {/* Main Content */}
+      <div className="relative z-10">
+        <div className="flex justify-between items-center p-4">
+          <h1 className="text-2xl font-bold text-blue-800 font-[Lato]">
+            Data Collection Assessment
+          </h1>
+          <button
+            onClick={toggleDarkMode}
+            className={`p-2 rounded-full ${isDarkMode
+              ? "bg-white font-[Lato] text-black transition-transform transform hover:scale-105 hover:bg-blue-600"
+              : "bg-black font-[Lato] text-white-800 transition-transform transform hover:scale-105 hover:bg-green-600"}`}
+          >
+            {isDarkMode ? "Light" : "Dark"}
+          </button>
+        </div>
+
+        {/* Questions Section */}
+        {renderQuestion()}
+
+        {/* Next/Submit Button */}
+        <div className="flex justify-between p-4">
+          <button
+            onClick={handleNext}
+            className="bg-gradient-to-r from-teal-500 to-blue-500 text-white font-[Lato] rounded-full py-3 px-8 font-semibold text-lg transition-transform transform hover:scale-105 shadow-xl hover:shadow-2xl"
+          >
+            {currentQuestionIndex === questions.length - 1 ? "Submit" : "Next"}
+          </button>
+        </div>
       </div>
     </div>
   );
