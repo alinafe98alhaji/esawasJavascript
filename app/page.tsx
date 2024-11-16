@@ -175,44 +175,42 @@ import Image from "next/image";
 
 export default function Home() {
   return (
-    <div className="h-screen bg-gradient-to-b from-teal-200 via-blue-400 to-blue-800 text-teal-900 flex flex-col items-center justify-between overflow-hidden font-sans">
-      {/* Logo positioned at top-center with enhanced visibility */}
-      <div className="relative w-[240px] h-[200px] flex justify-center">
+    <div className="h-screen bg-gradient-to-b from-teal-200 via-blue-400 to-blue-800 text-teal-900 flex flex-col items-center justify-center font-sans overflow-hidden">
+      {/* Logo */}
+      <div className="w-[240px] h-[200px] mb-4 mt-4 flex justify-center">
         <Image
           src="/images/logo.svg" // Replace with your logo path
           alt="ESAWAS logo"
-          layout="responsive"
-          width={0}
-          height={0}
+          width={240} // Fixed width
+          height={200} // Fixed height
           priority
         />
       </div>
 
       {/* Main Content */}
-      <main className="flex flex-col gap-4 items-center text-center bg-blue-200 bg-opacity-95 p-2 rounded-2xl shadow-2xl max-w-2xl w-md transform hover:scale-[1.01] duration-300 -mt-24">
+      <main className="flex flex-col gap-4 items-center text-center bg-blue-200 bg-opacity-85 p-6 rounded-2xl shadow-2xl max-w-2xl w-full transform hover:scale-[1.01] duration-300 mb-30 mb-10">
         {/* Main Heading */}
-        <h1 className="text-3xl sm:text-4xl font-[Inter] font-bold tracking-tight text-blue-700 drop-shadow-md leading-tight">
-          Welcome to the ESAWAS Organisational Level Data Maturity Assessment
-          Tool
+        <h1 className="text-3xl sm:text-4xl font-[Inter] font-bold tracking-tight text-blue-700 drop-shadow-md leading-tight mb-4">
+          ESAWAS Organisational Level Data Maturity Assessment Tool
         </h1>
 
         {/* Subheading */}
-        <p className="text-lg sm:text-xl text-gray-700 leading-relaxed max-w-lg font-[Lato]">
+        <p className="text-lg sm:text-xl text-gray-700 leading-relaxed max-w-lg font-[Lato] mb-6">
           The trusted platform for evaluating and enhancing data maturity in the
           water and sanitation sectors.
         </p>
 
         {/* Steps List */}
-        <ol className="list-decimal list-inside text-base text-gray-600 max-w-lg space-y-1 pl-4 font-[Lato]">
+        <ol className="list-decimal list-inside text-base text-gray-600 max-w-lg space-y-2 pl-6 font-[Lato] mb-6">
           <li>Get started by completing our comprehensive assessment.</li>
           <li>Save your progress and return whenever you need.</li>
           <li>Review insights and contribute to better service delivery.</li>
         </ol>
 
         {/* Call to Action Buttons */}
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
+        <div className="flex flex-col sm:flex-row gap-4 items-center">
           <a
-            className="bg-gradient-to-r from-teal-500 to-blue-500 text-white rounded-full py-2 px-6 font-[Inter] font-semibold text-lg transition-transform transform hover:scale-105 shadow-xl hover:shadow-2xl"
+            className="bg-gradient-to-r from-teal-500 to-blue-500 text-white rounded-full py-2 px-6 font-[Inter] font-semibold text-lg transition-transform transform hover:scale-105 shadow-xl hover:shadow-2xl mb-4 sm:mb-0"
             href="/datacollectionques"
           >
             Start Assessment
@@ -229,8 +227,7 @@ export default function Home() {
       </main>
 
       {/* Footer */}
-      <footer className="flex items-center justify-center text-gray-800 mb-4 font-[Lato]">
-        {/* Footer Text Link */}
+      <footer className="flex items-center justify-center text-gray-800 mb-4 mt-5 font-[Lato]">
         <a
           className="flex items-center gap-2 hover:text-blue-200 transition-colors"
           href="https://www.esawas.org/"

@@ -1,46 +1,19 @@
-import { NextRequest, NextResponse } from "next/server";
-import { Pool } from "pg";
+import clientPromise from "@/app/lib/mongodb";
+import { NextResponse } from "next/server";
 
-// Set up a PostgreSQL pool connection
-const pool = new Pool({
-  user: "postgres",
-  host: "localhost",
-  database: "esawas",
-  password: "123456",
-  port: 5432
-});
-
-export async function POST(req: NextRequest) {
-  const responses = await req.json();
-
+export async function POST(request: Request) {
   try {
-    // Log the incoming responses for better insight
-    console.log("Received responses:", responses);
+    const data = await request.json();
+    const client = await clientPromise;
+    const db = client.db("ESAWAS-DB");
+    const collection = db.collection("users"); // Adjust to your collection name
 
-    const parsedResponses = Object.entries(responses).map(([key, value]) => ({
-      question_id: key,
-      response_data: JSON.parse(value as string)
-    }));
-
-    // Log parsed responses to ensure JSON parsing is correct
-    console.log("Parsed responses:", parsedResponses);
-
-    // Database insertions
-    const insertPromises = parsedResponses.map(
-      ({ question_id, response_data }) =>
-        pool.query(
-          `INSERT INTO responses (question_id, response_data) VALUES ($1, $2)`,
-          [question_id, response_data]
-        )
-    );
-
-    await Promise.all(insertPromises);
-
-    return NextResponse.json({ message: "Responses saved successfully" });
+    await collection.insertOne(data);
+    return NextResponse.json({ message: "Data submitted successfully" });
   } catch (error) {
-    console.error("Error saving responses:", error);
+    console.error("Error in POST /api/submitresponses:", error);
     return NextResponse.json(
-      { message: "Failed to save responses" },
+      { message: "Error submitting data", error },
       { status: 500 }
     );
   }

@@ -87,25 +87,81 @@ const SurveyPage = () => {
     }
   ];
 
+  const renderCustomQuestionInputs = (
+    questionId: string,
+    areas: AreaNames[],
+    options: string[]
+  ) => {
+    if (questionId === "5aiii" || questionId === "5aiv") {
+      return areas.map(area =>
+        <div
+          key={area}
+          className="mb-2 bg-white p-4 rounded-lg shadow hover:bg-blue-100 transition-colors duration-200"
+        >
+          <label className="text-blue-800 font-medium">
+            {areaFullNames[area]}
+          </label>
+          <div className="flex flex-col">
+            {options.map((option, index) =>
+              <div key={index} className="flex items-center mb-1">
+                <input
+                  type="radio"
+                  name={`${questionId}-${area}`}
+                  value={`${index + 1}`}
+                  checked={responses[area] === `${index + 1}`}
+                  onChange={() => handleFiveOptionChange(area, `${index + 1}`)}
+                  className="mr-1 text-blue-600 border-gray-300 focus:ring-blue-500"
+                />
+                <span className="text-gray-800">
+                  {option}
+                </span>
+              </div>
+            )}
+          </div>
+          {questionId === "5aiii" &&
+            <textarea
+              placeholder="Please specify other reasons"
+              onChange={e => handleFiveOptionChange(area, e.target.value)}
+              value={responses[area] || ""}
+              className="mt-2 p-2 border border-gray-300 rounded-md"
+            />}
+          {questionId === "5aiv" &&
+            <textarea
+              placeholder="Please specify other reasons"
+              onChange={e => handleFiveOptionChange(area, e.target.value)}
+              value={responses[area] || ""}
+              className="mt-2 p-2 border border-gray-300 rounded-md"
+            />}
+        </div>
+      );
+    }
+    return null;
+  };
+
   const toggleDarkMode = () => {
     setIsDarkMode(prevMode => !prevMode);
   };
 
-  async function submitResponses(data: Record<string, any>) {
+  async function submitResponses(formData: any) {
+    const compiledResponse = {
+      responseId: crypto.randomUUID(), // Generate a unique ID for the response
+      responses: formData // Your compiled survey data
+    };
+
     try {
-      const response = await fetch("/api/submitresponses", {
+      const res = await fetch("/api/testmdb", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(data)
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(compiledResponse)
       });
 
-      if (!response.ok) {
-        // Log the response to understand the failure
-        console.error("Response error:", await response.json());
-        throw new Error("Failed to submit responses");
+      if (res.ok) {
+        console.log("Response saved successfully!");
+      } else {
+        console.error("Failed to save response");
       }
-
-      console.log("Responses submitted successfully");
     } catch (error) {
       console.error("Error:", error);
     }
@@ -125,10 +181,6 @@ const SurveyPage = () => {
       [area]: value
     }));
     setError(null);
-  };
-
-  const validateAllFieldsSelected = (areas: AreaNames[]) => {
-    return areas.every(area => responses[area] !== null);
   };
 
   const getYesAreas = () =>
@@ -240,13 +292,6 @@ const SurveyPage = () => {
     setError(null);
   };
 
-  // const handleBack = () => {
-  //   if (currentQuestionIndex > 0) {
-  //     setCurrentQuestionIndex(prevIndex => prevIndex - 1);
-  //     setError(null);
-  //   }
-  // };
-
   const renderQuestion = () => {
     const currentQuestion = questions[currentQuestionIndex];
 
@@ -336,9 +381,17 @@ const SurveyPage = () => {
         {currentQuestion.id === "5aii" &&
           renderFiveOptionRadios(yesAreas1ai, optionsForQuestion1aii)}
         {currentQuestion.id === "5aiii" &&
-          renderFiveOptionRadios(finalAreas1aiii, optionsForQuestion1aiii)}
+          renderCustomQuestionInputs(
+            currentQuestion.id,
+            finalAreas1aiii,
+            optionsForQuestion1aiii
+          )}
         {currentQuestion.id === "5aiv" &&
-          renderFiveOptionRadios(noAreas1ai, optionsForQuestion1aiii)}
+          renderCustomQuestionInputs(
+            currentQuestion.id,
+            noAreas1ai,
+            optionsForQuestion1aiii
+          )}
         {currentQuestion.id === "submit" &&
           <div>
             <h3 className="mb-4 text-blue-800">

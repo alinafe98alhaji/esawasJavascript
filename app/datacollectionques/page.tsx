@@ -89,25 +89,81 @@ const SurveyPage = () => {
     }
   ];
 
+  const renderCustomQuestionInputs = (
+    questionId: string,
+    areas: AreaNames[],
+    options: string[]
+  ) => {
+    if (questionId === "1aiii" || questionId === "1aiv") {
+      return areas.map(area =>
+        <div
+          key={area}
+          className="mb-2 bg-white p-4 rounded-lg shadow hover:bg-blue-100 transition-colors duration-200"
+        >
+          <label className="text-blue-800 font-medium">
+            {areaFullNames[area]}
+          </label>
+          <div className="flex flex-col">
+            {options.map((option, index) =>
+              <div key={index} className="flex items-center mb-1">
+                <input
+                  type="radio"
+                  name={`${questionId}-${area}`}
+                  value={`${index + 1}`}
+                  checked={responses[area] === `${index + 1}`}
+                  onChange={() => handleFiveOptionChange(area, `${index + 1}`)}
+                  className="mr-1 text-blue-600 border-gray-300 focus:ring-blue-500"
+                />
+                <span className="text-gray-800">
+                  {option}
+                </span>
+              </div>
+            )}
+          </div>
+          {questionId === "1aiii" &&
+            <textarea
+              placeholder="Please specify other reasons"
+              onChange={e => handleFiveOptionChange(area, e.target.value)}
+              value={responses[area] || ""}
+              className="mt-2 p-2 border border-gray-300 rounded-md"
+            />}
+          {questionId === "1aiv" &&
+            <textarea
+              placeholder="Please specify other reasons"
+              onChange={e => handleFiveOptionChange(area, e.target.value)}
+              value={responses[area] || ""}
+              className="mt-2 p-2 border border-gray-300 rounded-md"
+            />}
+        </div>
+      );
+    }
+    return null;
+  };
+
   const toggleDarkMode = () => {
     setIsDarkMode(prevMode => !prevMode);
   };
 
-  async function submitResponses(data: Record<string, any>) {
+  async function submitResponses(formData: any) {
+    const compiledResponse = {
+      responseId: crypto.randomUUID(), // Generate a unique ID for the response
+      responses: formData // Your compiled survey data
+    };
+
     try {
-      const response = await fetch("/api/submitresponses", {
+      const res = await fetch("/api/testmdb", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(data)
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(compiledResponse)
       });
 
-      if (!response.ok) {
-        // Log the response to understand the failure
-        console.error("Response error:", await response.json());
-        throw new Error("Failed to submit responses");
+      if (res.ok) {
+        console.log("Response saved successfully!");
+      } else {
+        console.error("Failed to save response");
       }
-
-      console.log("Responses submitted successfully");
     } catch (error) {
       console.error("Error:", error);
     }
@@ -338,21 +394,28 @@ const SurveyPage = () => {
         {currentQuestion.id === "1aii" &&
           renderFiveOptionRadios(yesAreas1ai, optionsForQuestion1aii)}
         {currentQuestion.id === "1aiii" &&
-          renderFiveOptionRadios(finalAreas1aiii, optionsForQuestion1aiii)}
+          renderCustomQuestionInputs(
+            currentQuestion.id,
+            finalAreas1aiii,
+            optionsForQuestion1aiii
+          )}
         {currentQuestion.id === "1aiv" &&
-          renderFiveOptionRadios(noAreas1ai, optionsForQuestion1aiii)}
+          renderCustomQuestionInputs(
+            currentQuestion.id,
+            noAreas1ai,
+            optionsForQuestion1aiii
+          )}
         {currentQuestion.id === "submit" &&
           <div>
             <h3 className="mb-4 text-blue-800">
               Thank you for completing the survey!
-            </h3>{" "}
-            {/* Adjusted text color */}
+            </h3>
             <p className="text-blue-800">Your responses have been recorded.</p>
             <div className="flex gap-30 items-bottom flex-col sm:flex-row justify-right">
               <a
                 className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5"
-                href="/datacollectionques/question1b" // Link to your survey page
-                target="_self" // Change to _self if you want to navigate in the same tab
+                href="/datacollectionques/question1b"
+                target="_self"
               >
                 next Survey
               </a>
