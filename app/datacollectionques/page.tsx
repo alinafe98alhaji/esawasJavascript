@@ -11,6 +11,21 @@ const SurveyPage = () => {
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [error, setError] = useState<string | null>(null);
 
+  type TextResponses = {
+    [key: string]: string | any; // For dynamic text responses
+  };
+
+  //const [textResponses, setTextResponses] = useState<TextResponses>({});
+  const [textResponses, setTextResponses] = useState({
+    UWSS: null,
+    USSM: null,
+    RWSSM: null,
+    RSSM: null,
+    FM: null,
+    RF: null,
+    UOM: null
+  });
+
   const [responses, setResponses] = useState({
     UWSS: null,
     USSM: null,
@@ -94,50 +109,42 @@ const SurveyPage = () => {
     areas: AreaNames[],
     options: string[]
   ) => {
-    if (questionId === "1aiii" || questionId === "1aiv") {
-      return areas.map(area =>
-        <div
-          key={area}
-          className="mb-2 bg-white p-4 rounded-lg shadow hover:bg-blue-100 transition-colors duration-200"
-        >
-          <label className="text-blue-800 font-medium">
-            {areaFullNames[area]}
-          </label>
-          <div className="flex flex-col">
-            {options.map((option, index) =>
-              <div key={index} className="flex items-center mb-1">
-                <input
-                  type="radio"
-                  name={`${questionId}-${area}`}
-                  value={`${index + 1}`}
-                  checked={responses[area] === `${index + 1}`}
-                  onChange={() => handleFiveOptionChange(area, `${index + 1}`)}
-                  className="mr-1 text-blue-600 border-gray-300 focus:ring-blue-500"
-                />
-                <span className="text-gray-800">
-                  {option}
-                </span>
-              </div>
-            )}
-          </div>
-          {questionId === "1aiii" &&
-            <textarea
-              placeholder="Please specify other reasons"
-              onChange={e => handleFiveOptionChange(area, e.target.value)}
-              value={responses[area] || ""}
-              className="mt-2 p-2 border border-gray-300 rounded-md"
-            />}
-          {questionId === "1aiv" &&
-            <textarea
-              placeholder="Please specify other reasons"
-              onChange={e => handleFiveOptionChange(area, e.target.value)}
-              value={responses[area] || ""}
-              className="mt-2 p-2 border border-gray-300 rounded-md"
-            />}
+    return areas.map(area =>
+      <div
+        key={area}
+        className="mb-2 bg-white p-4 rounded-lg shadow hover:bg-blue-100 transition-colors duration-200"
+      >
+        <label className="text-blue-800 font-medium">
+          {areaFullNames[area]}
+        </label>
+        <div className="flex flex-col">
+          {options.map((option, index) =>
+            <div key={index} className="flex items-center mb-1">
+              <input
+                type="radio"
+                name={`${questionId}-${area}`}
+                value={option}
+                checked={responses[area] === option}
+                onChange={() => handleFiveOptionChange(area, option)}
+                className="mr-1 text-blue-600 border-gray-300 focus:ring-blue-500"
+              />
+              <span className="text-gray-800">
+                {option}
+              </span>
+            </div>
+          )}
         </div>
-      );
-    }
-    return null;
+
+        {/* Conditionally Render the Text Field */}
+        {responses[area] === "Others, please specify" &&
+          <textarea
+            placeholder="Please specify other reasons"
+            onChange={e => handleTextBoxChange(area, e.target.value)} // Save the user's input
+            value={textResponses[area] || ""} // Display the user's input (or empty if null)
+            className="mt-2 p-2 border border-gray-300 rounded-md"
+          />}
+      </div>
+    );
   };
 
   const toggleDarkMode = () => {
@@ -145,8 +152,13 @@ const SurveyPage = () => {
   };
 
   async function submitResponses(formData: any) {
+    const userId = sessionStorage.getItem("user_id");
+    if (!userId) {
+      console.error("User ID is not found.");
+      return;
+    }
     const compiledResponse = {
-      responseId: crypto.randomUUID(), // Generate a unique ID for the response
+      Id: userId, // Generate a unique ID for the response
       responses: formData // Your compiled survey data
     };
 
@@ -175,6 +187,13 @@ const SurveyPage = () => {
       [area]: value
     }));
     setError(null);
+  };
+
+  const handleTextBoxChange = (area: string, value: string) => {
+    setTextResponses(prevResponses => ({
+      ...prevResponses,
+      [area]: value // Update the response for the specific area
+    }));
   };
 
   const handleFiveOptionChange = (area: string, value: string) => {
@@ -321,7 +340,7 @@ const SurveyPage = () => {
               <input
                 type="radio"
                 name={`yesno-${area}`}
-                value="yes"
+                value="yes/1"
                 checked={responses[area] === true}
                 onChange={() => handleYesNoChange(area, true)}
                 className="mr-1 text-green-500 border-gray-300 focus:ring-green-500"
@@ -332,7 +351,7 @@ const SurveyPage = () => {
               <input
                 type="radio"
                 name={`yesno-${area}`}
-                value="no"
+                value="no/0"
                 checked={responses[area] === false}
                 onChange={() => handleYesNoChange(area, false)}
                 className="mr-1 text-red-500 border-gray-300 focus:ring-red-500"

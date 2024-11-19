@@ -6,14 +6,25 @@ export async function POST(req: Request) {
     // Parse the incoming JSON data
     const data = await req.json();
 
+    const { Id, responses } = data;
+
+    // Validate required fields
+    if (!Id || !responses) {
+      return NextResponse.json(
+        { message: "userId, questionId, and responseData are required." },
+        { status: 400 }
+      );
+    }
+
     // Connect to MongoDB
     const client = await clientPromise;
-    const db = client.db("Assessment_responses"); // Replace "surveyDB" with your actual database name
-    const collection = db.collection("compiledResponses"); // Replace with your actual collection name
+    const db = client.db("Assessment_responses"); // your actual database name
+    const collection = db.collection("responses"); //your actual collection name
 
     // Insert the response into the collection
     const result = await collection.insertOne({
-      ...data,
+      Id,
+      responses,
       submittedAt: new Date() // Automatically add a timestamp
     });
 

@@ -1,6 +1,6 @@
 import { MongoClient } from "mongodb";
 
-const uri = process.env.MONGODB_URI; //Use the URI from the environment
+const uri = process.env.MONGODB_URI; // Use the URI from the environment
 const options = {};
 
 if (!uri) {
@@ -26,3 +26,37 @@ if (process.env.NODE_ENV === "development") {
 }
 
 export default clientPromise;
+
+// New Functions
+
+export async function getDb() {
+  const client = await clientPromise;
+  return client.db("Assessment_responses"); // Make sure to replace with your actual database name
+}
+
+export async function saveUserDetails(userDetails: {
+  name: string;
+  organisation: string;
+  country: string;
+}) {
+  const db = await getDb();
+  const collection = db.collection("users");
+  const result = await collection.insertOne(userDetails);
+  return result.insertedId;
+}
+
+export async function saveSurveyResponse(
+  userId: string,
+  questionId: number,
+  responseData: string
+) {
+  const db = await getDb();
+  const collection = db.collection("responses");
+  const result = await collection.insertOne({
+    user_id: userId,
+    question_id: questionId,
+    response_data: responseData,
+    submitted_at: new Date()
+  });
+  return result.insertedId;
+}
