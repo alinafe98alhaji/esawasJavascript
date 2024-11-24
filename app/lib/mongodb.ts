@@ -1,4 +1,10 @@
 import { MongoClient } from "mongodb";
+import mongoose from "mongoose";
+import SurveyResponse from "../models/surveyResponse"; // Adjust the path as needed
+
+if (!mongoose.models.SurveyResponse) {
+  mongoose.model("SurveyResponse", SurveyResponse.schema);
+}
 
 const uri = process.env.MONGODB_URI; // Use the URI from the environment
 const options = {};

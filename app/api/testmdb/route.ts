@@ -3,40 +3,41 @@ import { NextResponse } from "next/server";
 
 export async function POST(req: Request) {
   try {
-    // Parse the incoming JSON data
-    const data = await req.json();
+    const client = await clientPromise;
+    const db = client.db("Assessment_responses");
 
-    const { Id, responses } = data;
+    // Parse the incoming request body
+    const body = await req.json();
 
-    // Validate required fields
-    if (!Id || !responses) {
+    // Log the request body for debugging
+    console.log("Incoming request body:", body);
+
+    // Ensure `responses` is populated correctly
+    if (!body.responses || Object.keys(body.responses).length === 0) {
       return NextResponse.json(
-        { message: "userId, questionId, and responseData are required." },
+        { message: "Responses field is empty or missing" },
         { status: 400 }
       );
     }
 
-    // Connect to MongoDB
-    const client = await clientPromise;
-    const db = client.db("Assessment_responses"); // your actual database name
-    const collection = db.collection("responses"); //your actual collection name
+    // Create a new document
+    const newResponse = {
+      Id: body.Id, // Unique identifier for the user
+      responses: body.responses, // Add responses as-is
+      submittedAt: new Date() // Add the current timestamp
+    };
 
-    // Insert the response into the collection
-    const result = await collection.insertOne({
-      Id,
-      responses,
-      submittedAt: new Date() // Automatically add a timestamp
-    });
+    // Save to the database
+    await db.collection("responses").insertOne(newResponse);
 
-    // Respond with success
     return NextResponse.json(
-      { message: "Response saved successfully!", result },
+      { message: "Response saved successfully!", newResponse },
       { status: 201 }
     );
   } catch (error) {
-    console.error("Error inserting compiled response:", error);
+    console.error("Error saving survey response:", error);
     return NextResponse.json(
-      { message: "Failed to save response", error },
+      { message: "Failed to save survey response", error },
       { status: 500 }
     );
   }

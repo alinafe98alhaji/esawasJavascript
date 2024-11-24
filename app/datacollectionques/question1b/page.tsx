@@ -143,8 +143,13 @@ const SurveyPage = () => {
   };
 
   async function submitResponses(formData: any) {
+    const userId = sessionStorage.getItem("user_id");
+    if (!userId) {
+      console.error("User ID is not found.");
+      return;
+    }
     const compiledResponse = {
-      responseId: crypto.randomUUID(), // Generate a unique ID for the response
+      Id: userId, // Generate a unique ID for the response
       responses: formData // Your compiled survey data
     };
 
