@@ -1,13 +1,9 @@
 {
-  "/page": "app/page.js",
-  "/details/page": "app/details/page.js",
-  "/datacollectionques/page": "app/datacollectionques/page.js",
-  "/datacollectionques/question1b/page": "app/datacollectionques/question1b/page.js",
   "/dashboard/page": "app/dashboard/page.js",
-  "/favicon.ico/route": "app/favicon.ico/route.js",
   "/api/dataCollectionResponses/route": "app/api/dataCollectionResponses/route.js",
   "/api/dataOwnershipAndManagementResponses/route": "app/api/dataOwnershipAndManagementResponses/route.js",
+  "/favicon.ico/route": "app/favicon.ico/route.js",
+  "/api/dataUsage/route": "app/api/dataUsage/route.js",
   "/api/dataOpenessAndFlow/route": "app/api/dataOpenessAndFlow/route.js",
-  "/api/dataQuality/route": "app/api/dataQuality/route.js",
-  "/api/dataUsage/route": "app/api/dataUsage/route.js"
+  "/api/dataQuality/route": "app/api/dataQuality/route.js"
 }

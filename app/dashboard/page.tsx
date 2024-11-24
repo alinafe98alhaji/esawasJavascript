@@ -68,7 +68,7 @@ const Dashboard = () => {
   const getCellColor = (percentage: string): string => {
     const value = parseFloat(percentage.replace("%", ""));
     if (value >= 75) return "#4CAF50"; // Green
-    if (value >= 50) return "#FFEB3B"; // Yellow
+    if (value >= 50) return "#FFA500"; // Yellow
     return "#F44336"; // Red
   };
 
